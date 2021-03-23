@@ -1,0 +1,12 @@
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\bin\Debug\net5.0\BlackMatter.Model.deps.json
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\bin\Debug\net5.0\BlackMatter.Model.dll
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\bin\Debug\net5.0\ref\BlackMatter.Model.dll
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\bin\Debug\net5.0\BlackMatter.Model.pdb
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.csprojAssemblyReference.cache
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.AssemblyInfoInputs.cache
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.AssemblyInfo.cs
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.csproj.CoreCompileInputs.cache
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.dll
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\ref\BlackMatter.Model.dll
+C:\Users\Gadácsi Ákos\source\Git\BlackMatter_invaders\oenik_prog4_2021_1_otycb0_bl3f7u\ShipSumo\BlackMatter.Model\obj\Debug\net5.0\BlackMatter.Model.pdb
