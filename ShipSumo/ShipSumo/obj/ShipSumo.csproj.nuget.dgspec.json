@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "A:\\OE\\4 felev\\prog4\\beadando\\game\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj": {}
+    "C:\\Users\\Gadácsi Ákos\\source\\Git\\BlackMatter_invaders\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj": {}
   },
   "projects": {
-    "A:\\OE\\4 felev\\prog4\\beadando\\game\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj": {
+    "C:\\Users\\Gadácsi Ákos\\source\\Git\\BlackMatter_invaders\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\OE\\4 felev\\prog4\\beadando\\game\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj",
+        "projectUniqueName": "C:\\Users\\Gadácsi Ákos\\source\\Git\\BlackMatter_invaders\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj",
         "projectName": "ShipSumo",
-        "projectPath": "A:\\OE\\4 felev\\prog4\\beadando\\game\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj",
-        "packagesPath": "C:\\Users\\lencs\\.nuget\\packages\\",
-        "outputPath": "A:\\OE\\4 felev\\prog4\\beadando\\game\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\obj\\",
+        "projectPath": "C:\\Users\\Gadácsi Ákos\\source\\Git\\BlackMatter_invaders\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\ShipSumo.csproj",
+        "packagesPath": "C:\\Users\\Gadácsi Ákos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gadácsi Ákos\\source\\Git\\BlackMatter_invaders\\oenik_prog4_2021_1_otycb0_bl3f7u\\ShipSumo\\ShipSumo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lencs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gadácsi Ákos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0-windows7.0": {
+            "targetAlias": "net5.0-windows",
             "projectReferences": {}
           }
         },
@@ -37,8 +37,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
           "imports": [
             "net461",
             "net462",
@@ -57,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
