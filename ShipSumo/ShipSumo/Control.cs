@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
-namespace BlackMatter.Model
+namespace BlackMatter
 {
-    class StartUp
+    class Control
     {
-
+        DispatcherTimer dispatcherTimer;
     }
 }

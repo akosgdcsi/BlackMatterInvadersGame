@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+	  <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EcoCore" Version="7.0.0.13095" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
+    <ProjectReference Include="..\ShipSumo\BlackMatter.csproj" />
   </ItemGroup>
 
 </Project>

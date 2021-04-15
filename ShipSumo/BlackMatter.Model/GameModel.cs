@@ -12,13 +12,15 @@ namespace BlackMatter.Model
         public List<Enemy> enemies { get; set; }
         public double GameWidth { get; set; }
         public double GameHeight { get; set; }
+        public int Wave { get; set; }
 
-        public GameModel(Player player, List<Enemy> enemies, double gameWidth, double gameHeight)
+        public GameModel(Player player, List<Enemy> enemies, double gameWidth, double gameHeight, int Wave)
         {
             this.player = player;
             this.enemies = enemies;
             GameWidth = gameWidth;
             GameHeight = gameHeight;
+            this.Wave = Wave;
         }
     }
 }
