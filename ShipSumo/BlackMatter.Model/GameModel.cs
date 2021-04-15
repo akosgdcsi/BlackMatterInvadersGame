@@ -8,11 +8,10 @@ namespace BlackMatter.Model
 {
     public class GameModel
     {
-        Player player;
-        List<Enemy> enemies;
-
-        public double GameWidth;
-        public double GameHeight;
+        public Player player { get; set; }
+        public List<Enemy> enemies { get; set; }
+        public double GameWidth { get; set; }
+        public double GameHeight { get; set; }
 
         public GameModel(Player player, List<Enemy> enemies, double gameWidth, double gameHeight)
         {
