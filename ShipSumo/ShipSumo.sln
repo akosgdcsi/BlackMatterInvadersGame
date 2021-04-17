@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter.Logic", "BlackM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter.Repository", "BlackMatter.Repository\BlackMatter.Repository.csproj", "{BC87116F-F81F-4ED8-95B8-8105D921B5FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Renderer", "BlackMatter.Renderer\BlackMatter.Renderer.csproj", "{7D9198AD-C6D4-402A-8756-D6C2ED7F4E1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BC87116F-F81F-4ED8-95B8-8105D921B5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC87116F-F81F-4ED8-95B8-8105D921B5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC87116F-F81F-4ED8-95B8-8105D921B5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9198AD-C6D4-402A-8756-D6C2ED7F4E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9198AD-C6D4-402A-8756-D6C2ED7F4E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9198AD-C6D4-402A-8756-D6C2ED7F4E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9198AD-C6D4-402A-8756-D6C2ED7F4E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
