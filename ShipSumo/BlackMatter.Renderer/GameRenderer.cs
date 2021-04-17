@@ -10,7 +10,7 @@ using BlackMatter.Model;
 
 namespace BlackMatter.Renderer
 {
-    public class Renderer
+    public class GameRenderer
     {
         GameModel model;
         Dictionary<string, Brush> brushes = new Dictionary<string, Brush>();

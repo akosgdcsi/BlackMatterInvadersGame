@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+	  <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlackMatter.Logic\BlackMatter.Logic.csproj" />
+    <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
+    <ProjectReference Include="..\BlackMatter.Renderer\BlackMatter.Renderer.csproj" />
+    <ProjectReference Include="..\BlackMatter.Repository\BlackMatter.Repository.csproj" />
+    <ProjectReference Include="..\ShipSumo\BlackMatter.csproj" />
+  </ItemGroup>
+
+</Project>
