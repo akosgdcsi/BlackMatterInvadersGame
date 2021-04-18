@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 
-namespace BlackMatter
+
+namespace BlackMatter.Repository
 {
-    class Control
-    {
-        DispatcherTimer dispatcherTimer;
+    public class GameRepository
+    {        
+        
     }
 }

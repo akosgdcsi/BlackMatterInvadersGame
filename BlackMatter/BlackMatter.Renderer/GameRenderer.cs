@@ -1,16 +1,17 @@
-﻿using System;
+﻿using BlackMatter.Model;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BlackMatter.Model;
-
 
 namespace BlackMatter.Renderer
 {
-    public class Renderer
+    public class GameRenderer
     {
         GameModel model;
         Dictionary<string, Brush> brushes = new Dictionary<string, Brush>();
@@ -25,10 +26,9 @@ namespace BlackMatter.Renderer
         FormattedText formattedText;
         int oldWave = -1;
 
-        public Renderer(GameModel model)
+        public GameRenderer(GameModel model)
         {
             this.model = model;
-            
         }
         Brush GetBrush(string fname)
         {
@@ -57,22 +57,13 @@ namespace BlackMatter.Renderer
 
             return dg;
         }
-        /*
-        private Drawing GetWaves()
-        {
-            if (oldWave!=model.Wave)
-            {
-                formattedText = new FormattedText(model.Wave.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 16, Brushes.Red, 1);
-                Text;
-            }
-            return formattedText;
-        }*/
+        
 
         private Drawing GetBullets()
         {
             if (Bullet == null)
             {
-                Geometry g = new RectangleGeometry(new Rect(305,400, 5, 5));
+                Geometry g = new RectangleGeometry(new Rect(305, 400, 5, 5));
                 Enemy = new GeometryDrawing(Brushes.Red, null, g);
             }
             return Enemy;
@@ -82,8 +73,8 @@ namespace BlackMatter.Renderer
         {
             if (Enemy == null)
             {
-                Geometry g = new RectangleGeometry(new Rect(300,400, 25, 25));
-                Enemy= new GeometryDrawing(Brushes.Red, null, g);
+                Geometry g = new RectangleGeometry(new Rect(300, 400, 25, 25));
+                Enemy = new GeometryDrawing(Brushes.Red, null, g);
             }
             return Enemy;
         }
@@ -92,15 +83,15 @@ namespace BlackMatter.Renderer
         {
             if (Player == null)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 25,25 ));
-                Player = new GeometryDrawing(PlayerBrush, null, g);                
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 25, 25));
+                Player = new GeometryDrawing(PlayerBrush, null, g);
             }
             return Player;
         }
 
         private Drawing GetBackground()
         {
-            if(BackGround ==null)
+            if (BackGround == null)
             {
                 Geometry g = new RectangleGeometry(new Rect(0, 0, model.GameWidth, model.GameHeight));
                 BackGround = new GeometryDrawing(Brushes.Black, null, g);
