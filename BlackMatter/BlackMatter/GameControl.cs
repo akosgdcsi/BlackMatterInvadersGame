@@ -10,13 +10,15 @@ using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
+using BlackMatter.Model.Interfaces;
+using BlackMatter.Logic.Interfaces;
 
 namespace BlackMatter
 {
     public class GameControl:FrameworkElement
-    {        
-        GameModel model;
-        GameLogic logic;
+    {
+        IGameModel model;
+        IGameLogic logic;
         GameRenderer renderer;
         DispatcherTimer dispatcherTimer;
 
@@ -27,8 +29,9 @@ namespace BlackMatter
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer = new DispatcherTimer();   
             this.logic =new GameLogic(model);
+            model = logic.InitModel();
             renderer = new GameRenderer(model);
 
             Window win = Window.GetWindow(this);
@@ -37,9 +40,15 @@ namespace BlackMatter
                 win.KeyDown += Win_KeyDown;
                 MouseDown += GameControl_MouseDown;
             }
-
-            InvalidateVisual();
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(30);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            
             dispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -56,10 +65,10 @@ namespace BlackMatter
         {
             switch(e.Key)
             {
-                case Key.Left: logic.PlayerMove(-1); break;
-                case Key.Right: logic.PlayerMove(1); break;
-                case Key.A: logic.PlayerMove(-1); break;
-                case Key.D: logic.PlayerMove(1); break;
+                case Key.Left: logic.PlayerMove(-10); break;
+                case Key.Right: logic.PlayerMove(10); break;
+                case Key.A: logic.PlayerMove(-10); break;
+                case Key.D: logic.PlayerMove(10); break;
             }
         }
 

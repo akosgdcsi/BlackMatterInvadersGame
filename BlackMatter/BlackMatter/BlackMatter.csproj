@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlackMatter.Logic\BlackMatter.Logic.csproj" />
     <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
-    <ProjectReference Include="..\BlackMatter.Renderer\BlackMatter.Renderer.csproj" />
+    <ProjectReference Include="..\BlackMatter.Renderer\BlackMatterRenderer.csproj" />
   </ItemGroup>
 
 </Project>
