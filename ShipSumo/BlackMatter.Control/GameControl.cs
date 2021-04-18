@@ -18,7 +18,7 @@ namespace BlackMatter.Control
         GameModel model;
         GameLogic logic;
         GameRenderer renderer;
-        DispatcherTimer
+        DispatcherTimer dispatcherTimer;
 
         public GameControl()
         {
