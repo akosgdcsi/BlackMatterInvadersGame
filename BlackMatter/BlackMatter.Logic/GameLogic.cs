@@ -8,7 +8,7 @@ using BlackMatter.Model;
 
 namespace BlackMatter.Logic
 {
-    class GameLogic
+    public class GameLogic
     {
         Random rnd = new Random();
         GameModel model;
