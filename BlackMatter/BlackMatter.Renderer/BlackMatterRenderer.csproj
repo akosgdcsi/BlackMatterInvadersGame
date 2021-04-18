@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\player_ship.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\player_ship.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
   </ItemGroup>
 

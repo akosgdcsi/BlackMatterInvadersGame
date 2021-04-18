@@ -1,4 +1,5 @@
 ﻿using BlackMatter.Model;
+using BlackMatter.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace BlackMatter.Renderer
 {
     public class GameRenderer
     {
-        GameModel model;
+        IGameModel model;
         Dictionary<string, Brush> brushes = new Dictionary<string, Brush>();
         Drawing BackGround;
         Drawing Player;
@@ -23,10 +24,11 @@ namespace BlackMatter.Renderer
         Pen red = new Pen(Brushes.Red, 2);
         Typeface font = new Typeface("Arial");
         Point textLocation = new Point(0, 1);
+        Point OldPlayerPosition = new Point();
         FormattedText formattedText;
         int oldWave = -1;
 
-        public GameRenderer(GameModel model)
+        public GameRenderer(IGameModel model)
         {
             this.model = model;
         }
@@ -36,7 +38,7 @@ namespace BlackMatter.Renderer
             {
                 BitmapImage bmp = new BitmapImage();
                 bmp.BeginInit();
-                bmp.StreamSource = Assembly.GetExecutingAssembly().GetManifestResourceStream(fname);
+                bmp.StreamSource = Assembly.LoadFrom("BlackMatterRenderer").GetManifestResourceStream("BlackMatterRenderer.Images." + fname);
                 bmp.EndInit();
                 ImageBrush ib = new ImageBrush(bmp);
                 brushes.Add(fname, ib);
@@ -44,15 +46,15 @@ namespace BlackMatter.Renderer
             return brushes[fname];
         }
 
-        Brush PlayerBrush { get { return GetBrush("BlackMatter.Renderer.Images.player_ship.png"); } }
+        Brush PlayerBrush { get { return GetBrush("player_ship.png"); } }
 
         public Drawing BuildDrawing()
         {
             DrawingGroup dg = new DrawingGroup();
             dg.Children.Add(GetBackground());
-            dg.Children.Add(GetPlayer());
-            dg.Children.Add(GetEnemies());
             dg.Children.Add(GetBullets());
+            dg.Children.Add(GetPlayer());
+            dg.Children.Add(GetEnemies());           
             //dg.Children.Add(GetWaves());
 
             return dg;
@@ -81,10 +83,12 @@ namespace BlackMatter.Renderer
 
         private Drawing GetPlayer()
         {
-            if (Player == null)
+            if (Player == null || OldPlayerPosition.X != model.player.X)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 25, 25));
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 50, 50));
                 Player = new GeometryDrawing(PlayerBrush, null, g);
+
+                OldPlayerPosition = new Point(model.player.X,model.player.Y);
             }
             return Player;
         }
@@ -93,7 +97,7 @@ namespace BlackMatter.Renderer
         {
             if (BackGround == null)
             {
-                Geometry g = new RectangleGeometry(new Rect(0, 0, model.GameWidth, model.GameHeight));
+                Geometry g = new RectangleGeometry(new Rect(0, 0, GameModel.GameWidth, GameModel.GameHeight));
                 BackGround = new GeometryDrawing(Brushes.Black, null, g);
             }
             return BackGround;
