@@ -1,11 +1,13 @@
 ﻿using BlackMatter.Model;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BlackMatter.Renderer
 {
@@ -55,16 +57,7 @@ namespace BlackMatter.Renderer
 
             return dg;
         }
-        /*
-        private Drawing GetWaves()
-        {
-            if (oldWave!=model.Wave)
-            {
-                formattedText = new FormattedText(model.Wave.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 16, Brushes.Red, 1);
-                Text;
-            }
-            return formattedText;
-        }*/
+        
 
         private Drawing GetBullets()
         {
