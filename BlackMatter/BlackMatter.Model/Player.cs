@@ -8,7 +8,7 @@ namespace BlackMatter.Model
 {
     public class Player : GameObject
     {
-        public int Life { get; set; }
+        public int Life { get; set; }        
 
     }
 }
