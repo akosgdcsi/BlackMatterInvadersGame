@@ -9,12 +9,14 @@ namespace BlackMatter.Model.Interfaces
 {
     public interface IGameModel
     {
-        Point Player { get; set; }
-        List<Point> Enemies { get; set; }
-        double GameWidth { get; set; }
-        double GameHeight { get; set; }
-        int Life { get; set; } // under review!!!!
-        int Score { get; set; }
-        int Level { get; set; }
+
+        Player player { get; set; }
+        List<Enemy> enemies { get; set; }
+        List<Bullet> PlayerBullets { get; set; }
+        List<Bullet> EnemyBullets { get; set; }
+        static double GameWidth { get { return 1000; } }
+        public static double GameHeight { get { return 1000; } }
+        public int Wave { get; set; }
+        public int Enemiesinthiswave { get; set; }
     }
 }

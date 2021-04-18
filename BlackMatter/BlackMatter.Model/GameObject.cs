@@ -11,7 +11,13 @@ namespace BlackMatter.Model
     {
 
         public double X { get; set; }
-        public double Y { get; set; } 
+        public double Y { get; set; }
 
+        public GameObject(double x, double y)
+        {
+            X = x;
+            Y = y;
+
+        }
     }
 }

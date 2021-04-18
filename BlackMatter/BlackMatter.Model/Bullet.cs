@@ -9,5 +9,9 @@ namespace BlackMatter.Model
     public class Bullet : GameObject
     {
         public bool IsCollided { get; set; }
+        public Bullet(double x, double y, bool isCollided = false) : base(x, y)
+        {
+            IsCollided = isCollided;
+        }
     }
 }
