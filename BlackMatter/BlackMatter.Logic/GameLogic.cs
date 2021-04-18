@@ -3,35 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlackMatter.Logic.Interfaces;
 using BlackMatter.Model;
-
+using BlackMatter.Model.Interfaces;
 
 namespace BlackMatter.Logic
 {
-    public class GameLogic
+    public class GameLogic : IGameLogic
     {
         Random rnd = new Random();
-        GameModel model;
+        IGameModel model;
         double Margin;
         double Space;
         int enemyrow { get; set; }
         
-        public GameLogic(GameModel model)
+        public GameLogic(IGameModel model)
         {
             this.model = model;
-            InitModel();
         }
 
-        private void InitModel()
+        public IGameModel InitModel()
         {
-            model.player.X = model.GameWidth / 2;
-            model.player.Y = model.GameHeight - 10;
-            model.player.Life = 3;
-            Margin = model.GameWidth / 8;
-            Space=model.GameWidth/5-2*Margin;
+            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
+            Margin = GameModel.GameWidth / 8;
+            Space=GameModel.GameWidth/5-2*Margin;
             model.enemies = EnemyPlacer();
-            model.Wave = 1;
             model.Enemiesinthiswave = model.Wave * 50;
+            return model;
         }
 
         private List<Enemy> EnemyPlacer()
@@ -39,21 +37,13 @@ namespace BlackMatter.Logic
             
             List<Enemy> enemies = new List<Enemy>();
             //Wavenkent 50 enemy
-            Enemy enemy = new Enemy
-            {
-                X = Margin + Space / 5,
-                Y = 0
-            };
+            Enemy enemy = new Enemy(Margin + Space / 5,0);
             enemies.Add(enemy);
                                    
             enemyrow = rnd.Next(1,3);
             for (int y = 1; y < enemyrow; y++)
             {
-                Enemy enemy1 = new Enemy
-                {
-                    X = Space / 5 * y,
-                    Y = 0
-                };
+                Enemy enemy1 = new Enemy(Space / 5 * y,0);
                 enemies.Add(enemy1);                
             }
 
@@ -65,39 +55,31 @@ namespace BlackMatter.Logic
             int newx = (int)(model.player.X + dx);
             if  (newx<0)
             {
-                newx = (int)model.GameWidth;
+                newx = (int)GameModel.GameWidth-50;
             }
-            else if (newx>model.GameWidth)
+            else if (newx>GameModel.GameWidth-50)
             {
                 newx = 0;
             }
-
+            model.player.X = newx;
         }
 
         public void EnemyMove()
         {
             foreach (var item in model.enemies)
             {
-                item.Y += model.GameHeight / 14;
+                item.Y += GameModel.GameHeight / 14;
             }
             Random rnd = new Random();
             if (model.Enemiesinthiswave > 0)
             {
-                Enemy enemy = new Enemy
-                {
-                    X = Margin + Space / 5,
-                    Y = 0
-                };
+                Enemy enemy = new Enemy(Margin + Space / 5,0);
                 model.enemies.Add(enemy);
 
                 enemyrow = rnd.Next(1, 3);
                 for (int y = 1; y < enemyrow; y++)
                 {
-                    Enemy enemy1 = new Enemy
-                    {
-                        X = Space / 5 * y,
-                        Y = 0
-                    };
+                    Enemy enemy1 = new Enemy(Space / 5 * y,0);
                     model.enemies.Add(enemy1);
                 }
 
@@ -108,13 +90,7 @@ namespace BlackMatter.Logic
 
         public void Shoot()
         {
-            Bullet bullet = new Bullet
-            {
-                X = model.player.X,
-                Y = model.player.Y - 1,
-                IsCollided = false,
-                
-            };
+            Bullet bullet = new Bullet(model.player.X, model.player.Y - 1);
 
             model.PlayerBullets.Add(bullet);
         }
@@ -135,24 +111,18 @@ namespace BlackMatter.Logic
         }
         public void Enemyshoot()
         {
-            var q1 = from x in model.enemies
+            var q1 = (from x in model.enemies
                  where x == ClosestEnemy()
-                 select x;
+                 select x).FirstOrDefault();
 
-            Bullet bullet = new Bullet
-            {
-                X = model.player.X,
-                Y = model.player.Y - 1,
-                IsCollided = false,
-
-            };
+            Bullet bullet = new Bullet(q1.X, q1.Y - 1);
             model.EnemyBullets.Add(bullet);
         }
         public void EnemyBulletMove()
         {
             foreach (var item in model.EnemyBullets)
             {
-                if (item.Y < model.GameHeight)
+                if (item.Y < GameModel.GameHeight)
                 {
                     item.Y += 0.5;
                 }

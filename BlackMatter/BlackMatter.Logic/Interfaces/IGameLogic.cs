@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlackMatter.Model;
+using BlackMatter.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace BlackMatter.Logic.Interfaces
 {
-    interface IGameLogic
+    public interface IGameLogic
     {
-        void InitModel();
-        void PlayerMove();
+        IGameModel InitModel();
+        void PlayerMove(int dx);
         void EnemyMove();
-        void PlayerFire();
-        void EnemyFire();    
+        void Shoot();
+        void BulletMove();
+        void Enemyshoot();
+        void EnemyBulletMove();
+        void EnemyDies(Enemy enemy);
+        void PlayerDmg();
     }
 }
