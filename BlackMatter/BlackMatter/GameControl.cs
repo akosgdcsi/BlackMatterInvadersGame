@@ -61,14 +61,14 @@ namespace BlackMatter
 
         private void BulletMover_Tick(object sender, EventArgs e)
         {
-            logic.EnemyMove();
             logic.BulletMove();
             InvalidateVisual();
         }
 
         private void EnemyMover_Tick(object sender, EventArgs e)
-        {            
-            logic.EnemyBulletMove();
+        {
+            logic.EnemyMove();   
+            InvalidateVisual();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)

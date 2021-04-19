@@ -97,17 +97,21 @@ namespace BlackMatter.Logic
 
         public void BulletMove()
         {
-            foreach (var item in model.PlayerBullets)
-            {
-                if (item.Y>0)
+            
+                foreach (var item in model.PlayerBullets.ToList())
                 {
-                    item.Y -= 0.5;
+
+                    if (item.Y > 0)
+                    {
+                        item.Y -= 5;
+                    }
+                    else
+                    {
+                        model.PlayerBullets.Remove(item);
+                    }
                 }
-                else
-                {
-                    model.PlayerBullets.Remove(item);
-                }
-            }
+
+            
         }
         public void Enemyshoot()
         {
