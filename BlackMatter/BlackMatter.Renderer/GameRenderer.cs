@@ -28,7 +28,7 @@ namespace BlackMatter.Renderer
         Point OldBulletPosition = new Point();
         Point OldEnemyPosition = new Point();
         FormattedText formattedText;
-        int oldWave = -1;
+        int oldWave = 0;
 
         public GameRenderer(IGameModel model)
         {
@@ -48,7 +48,12 @@ namespace BlackMatter.Renderer
             return brushes[fname];
         }
 
-        Brush PlayerBrush { get { return GetBrush("player_ship.png"); } }
+        Brush Player_hp3_Brush { get { return GetBrush("player_hp3.png"); } }
+        Brush Player_hp2_Brush { get { return GetBrush("player_hp2.png"); } }
+        Brush Player_hp1_Brush { get { return GetBrush("player_hp1.png"); } }
+        Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
+        Brush BulletBrush { get { return GetBrush("player_laser_1.png"); } }
+        Brush ExplosionBrush { get { return GetBrush("enemy_eyplosion.png"); } }
 
         public Drawing BuildDrawing()
         {
@@ -83,15 +88,18 @@ namespace BlackMatter.Renderer
             {
                 if (Bullet == null || OldBulletPosition.Y != item.Y)
                 {
-                    Geometry g = new RectangleGeometry(new Rect(item.X+22.5, item.Y-3, 5, 5));
-                    Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
+                    Geometry g = new RectangleGeometry(new Rect(item.X+22.5, item.Y-3, 50, 50));
+                    Bullet = new GeometryDrawing(BulletBrush, null, g);
                     OldBulletPosition = new Point(item.X, item.Y);
+
+
+                    //return Bullet;                    
                 }
             }
             if (Bullet ==null)
             {
                 Geometry g = new RectangleGeometry(new Rect(-1, -1, 5, 5));
-                Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
+                Bullet = new GeometryDrawing(BulletBrush, null, g);
             }
             return Bullet;
         }
@@ -103,8 +111,8 @@ namespace BlackMatter.Renderer
             {
                 if (Enemy == null || OldEnemyPosition.Y!= item.Y)
                 {
-                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 50, 50));
-                    Enemy = new GeometryDrawing(Brushes.Red, null, g);
+                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 140, 140));
+                    Enemy = new GeometryDrawing(EnemyBrush, null, g);
 
                     OldEnemyPosition = new Point(item.X, item.Y);
                     return Enemy;
@@ -117,13 +125,28 @@ namespace BlackMatter.Renderer
 
         private Drawing GetPlayer()
         {
-            if (Player == null || OldPlayerPosition.X != model.player.X)
+            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life==3)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 50, 50));
-                Player = new GeometryDrawing(PlayerBrush, null, g);
-
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Player = new GeometryDrawing(Player_hp3_Brush, null, g);
+                
                 OldPlayerPosition = new Point(model.player.X,model.player.Y);
             }
+            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 2)
+            {
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Player = new GeometryDrawing(Player_hp2_Brush, null, g);
+
+                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+            }
+            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 1)
+            {
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Player = new GeometryDrawing(Player_hp1_Brush, null, g);
+
+                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+            }
+
             return Player;
         }
 
