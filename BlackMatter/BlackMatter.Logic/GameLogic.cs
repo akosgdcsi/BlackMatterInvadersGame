@@ -15,7 +15,6 @@ namespace BlackMatter.Logic
         IGameModel model;
         double Margin;
         double Space;
-        int enemyrow { get; set; }
         
         public GameLogic(IGameModel model)
         {
@@ -25,26 +24,30 @@ namespace BlackMatter.Logic
         public IGameModel InitModel()
         {
             model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
-            Margin = GameModel.GameWidth / 20;
-            Space=(GameModel.GameWidth/5)-(2*Margin);
-            model.Enemiesinthiswave = model.Wave * 50;
+            Space=GameModel.GameWidth/8;
+            model.Enemiesinthiswave = model.Wave * 10;
             model.enemies = EnemyPlacer();            
             return model;
         }
 
         private List<Enemy> EnemyPlacer()
         {
+            double[] xplace = new double[8];
             
-            List<Enemy> enemies = new List<Enemy>();
-            //Wavenkent 50 enemy
-            Enemy enemy = new Enemy(Margin + (Space / 5),10);
-            enemies.Add(enemy);
-                                   
-            enemyrow = rnd.Next(2,6);
-            for (int y = 1; y <= enemyrow; y++)
+            for (int i = 0; i < xplace.Length; i++)
             {
-                Enemy enemy1 = new Enemy(Space / 5 * y,10);
-                enemies.Add(enemy1);                
+                xplace[i] =(i * (GameModel.GameWidth / 8));
+            }
+            int enemyrow = rnd.Next(0, 8);
+            double[] enemyplacer = new double[enemyrow];
+            for (int i = 0; i < enemyrow; i++)
+            {
+                enemyplacer[i] = xplace[rnd.Next(0, 8)];
+            }
+            List<Enemy> enemies = new List<Enemy>();
+            foreach (var item in enemyplacer)
+            {
+                enemies.Add(new Enemy(item, 10));
             }
 
             return enemies;
@@ -68,50 +71,56 @@ namespace BlackMatter.Logic
         {
             foreach (var item in model.enemies)
             {
-                item.Y += GameModel.GameHeight / 14;
+                item.Y += GameModel.GameHeight / 10;
             }
-            Random rnd = new Random();
-            if (model.Enemiesinthiswave > 0)
+            double[] xplace = new double[8];
+
+            for (int i = 0; i < xplace.Length; i++)
             {
-                Enemy enemy = new Enemy(Margin + Space / 5,0);
-                model.enemies.Add(enemy);
-
-                enemyrow = rnd.Next(1, 3);
-                for (int y = 1; y < enemyrow; y++)
-                {
-                    Enemy enemy1 = new Enemy(Space / 5 * y,0);
-                    model.enemies.Add(enemy1);
-                }
-
-                
+                xplace[i] =(i * (GameModel.GameWidth / 8));
             }
+            int enemyrow = rnd.Next(0, 8);
+            double[] enemyplacer = new double[enemyrow];
+            for (int i = 0; i < enemyrow; i++)
+            {
+                enemyplacer[i] = xplace[rnd.Next(0, 8)];
+            }
+            
+            foreach (var item in enemyplacer)
+            {
+                model.enemies.Add(new Enemy(item, 10));
+            }
+            //foreach (var item in model.enemies)
+            //{
+            //    item.Y += GameModel.GameHeight / 14;
+            //}
+            //if (model.Enemiesinthiswave > 0)
+            //{
+            //    Enemy enemy = new Enemy(Margin + Space,0);
+            //    model.enemies.Add(enemy);
+
+            //    enemyrow = rnd.Next(1, 3);
+            //    for (int y = 1; y < enemyrow; y++)
+            //    {
+            //        Enemy enemy1 = new Enemy(Space*y,0);
+            //        model.enemies.Add(enemy1);
+            //    }
+
+
+            //}
 
         }
 
-        public void Shoot()
+        public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(model.player.X, model.player.Y - 1);
+            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1);
 
-            model.PlayerBullets.Add(bullet);
+            return bullet;
         }
 
-        public void BulletMove()
+        public void BulletMove(ref Bullet bullet)
         {
-            
-                foreach (var item in model.PlayerBullets.ToList())
-                {
-
-                    if (item.Y > 0)
-                    {
-                        item.Y -= 5;
-                    }
-                    else
-                    {
-                        model.PlayerBullets.Remove(item);
-                    }
-                }
-
-            
+                bullet.Y -= 5;
         }
         public void Enemyshoot()
         {

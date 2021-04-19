@@ -16,23 +16,31 @@ namespace BlackMatter.Renderer
     {
         IGameModel model;
         Dictionary<string, Brush> brushes = new Dictionary<string, Brush>();
-        Drawing BackGround;
-        Drawing Player;
-        Drawing Enemy;
-        Drawing Bullet;
+        Drawing backGround;
+        Drawing player;
+        Drawing enemy;
+        Drawing bullet;
         Drawing Text;
         Pen red = new Pen(Brushes.Red, 2);
         Typeface font = new Typeface("Arial");
         Point textLocation = new Point(0, 1);
         Point OldPlayerPosition = new Point();
-        Point OldBulletPosition = new Point();
-        Point OldEnemyPosition = new Point();
+        List<Point> OldBulletPositions = new List<Point>();
+        List<Point> OldEnemyPositions = new List<Point>();
         FormattedText formattedText;
         int oldWave = 0;
 
         public GameRenderer(IGameModel model)
         {
             this.model = model;
+        }
+        internal static BitmapImage GetImage(string fileName)
+        {
+            BitmapImage bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.StreamSource = Assembly.LoadFrom("BlackMatterRenderer").GetManifestResourceStream("BlackMatterRenderer.Images." + fileName);
+            bmp.EndInit();
+            return bmp;
         }
         Brush GetBrush(string fname)
         {
@@ -52,7 +60,7 @@ namespace BlackMatter.Renderer
         Brush Player_hp2_Brush { get { return GetBrush("player_hp2.png"); } }
         Brush Player_hp1_Brush { get { return GetBrush("player_hp1.png"); } }
         Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
-        Brush BulletBrush { get { return GetBrush("player_laser_1.png"); } }
+        BitmapImage BulletBrush { get { return GetImage("player_laser_1.png"); } }
         Brush ExplosionBrush { get { return GetBrush("enemy_explosion.png"); } }
         Brush BackGroundBrush { get { return GetBrush("background.png"); } }
 
@@ -63,102 +71,111 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetPlayer());
             dg.Children.Add(GetPlayerBullets());
             dg.Children.Add(GetEnemies());
-            dg.Children.Add(GetEnemyBullets());
+            //dg.Children.Add(GetEnemyBullets());
             //dg.Children.Add(GetWaves());
 
             return dg;
         }
-        
+
 
         private Drawing GetEnemyBullets()
         {
+            DrawingGroup dg = new DrawingGroup();
             foreach (var item in model.EnemyBullets)
             {
-                if (Bullet == null || OldBulletPosition.Y != item.Y)
+                if (bullet == null || !OldBulletPositions.Select(x => x.Y).Contains(item.Y))
                 {
-                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 5, 5));
-                    Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
-                    OldBulletPosition = new Point(item.X, item.Y);
+                    ImageDrawing box = new ImageDrawing(GetImage("player_laser_1.png"), new Rect(item.X,
+                           item.Y, 50, 50));
+                    dg.Children.Add(box);
                 }
             }
-            return Bullet;
+            bullet = dg;
+            return bullet;
         }
         private Drawing GetPlayerBullets()
         {
+            DrawingGroup dg = new DrawingGroup();
             foreach (var item in model.PlayerBullets)
             {
-                if (Bullet == null || OldBulletPosition.Y != item.Y)
+                if (bullet == null || !OldBulletPositions.Select(x =>x.Y).Contains(item.Y))
                 {
-                    Geometry g = new RectangleGeometry(new Rect(item.X+22.5, item.Y-3, 50, 50));
-                    Bullet = new GeometryDrawing(BulletBrush, null, g);
-                    OldBulletPosition = new Point(item.X, item.Y);
-
-
+                    //Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 50, 50));
+                    //bullet = new GeometryDrawing(BulletBrush, null, g);
+                    //OldBulletPositions = new Point(item.X, item.Y);
+                    ImageDrawing box = new ImageDrawing(GetImage("player_laser_1.png"), new Rect(item.X,
+                           item.Y, 50, 50));
+                    dg.Children.Add(box);
+                    
                     //return Bullet;                    
                 }
+                
             }
-            if (Bullet ==null)
-            {
-                Geometry g = new RectangleGeometry(new Rect(-1, -1, 5, 5));
-                Bullet = new GeometryDrawing(BulletBrush, null, g);
-            }
-            return Bullet;
+            bullet = dg;
+            //if (bullet ==null)
+            //{
+            //    Geometry g = new RectangleGeometry(new Rect(-1, -1, 5, 5));
+            //    bullet = new GeometryDrawing(BulletBrush, null, g);
+            //}
+            return bullet;
         }
 
         private Drawing GetEnemies()
         {
-            
-            foreach(var item in model.enemies)
+            DrawingGroup dg = new DrawingGroup();
+            foreach (var item in model.enemies)
             {
-                if (Enemy == null || OldEnemyPosition.Y!= item.Y)
+                if (enemy == null || !OldEnemyPositions.Select(x => x.Y).Contains(item.Y))
                 {
-                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 140, 140));
-                    Enemy = new GeometryDrawing(EnemyBrush, null, g);
+                    //Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 140, 140));
+                    //enemy = new GeometryDrawing(EnemyBrush, null, g);
 
-                    OldEnemyPosition = new Point(item.X, item.Y);
-                    return Enemy;
+                    //OldEnemyPositions = new Point(item.X, item.Y);
+                    ImageDrawing box = new ImageDrawing(GetImage("enemy_1.png"), new Rect(item.X,
+                           item.Y, 100, 100));
+                    dg.Children.Add(box);
                 }
             }
-                
+            enemy = dg;    
             
-            return Enemy;
+            return enemy;
         }
 
         private Drawing GetPlayer()
         {
-            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life==3)
+            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life==3)
             {
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
-                Player = new GeometryDrawing(Player_hp3_Brush, null, g);
+                player = new GeometryDrawing(Player_hp3_Brush, null, g);
                 
                 OldPlayerPosition = new Point(model.player.X,model.player.Y);
             }
-            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 2)
+            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 2)
             {
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
-                Player = new GeometryDrawing(Player_hp2_Brush, null, g);
+                player = new GeometryDrawing(Player_hp2_Brush, null, g);
 
                 OldPlayerPosition = new Point(model.player.X, model.player.Y);
             }
-            if (Player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 1)
+            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 1)
             {
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
-                Player = new GeometryDrawing(Player_hp1_Brush, null, g);
+                player = new GeometryDrawing(Player_hp1_Brush, null, g);
 
                 OldPlayerPosition = new Point(model.player.X, model.player.Y);
             }
 
-            return Player;
+            return player;
         }
 
         private Drawing GetBackground()
         {
-            if (BackGround == null)
+            if (backGround == null)
             {
                 Geometry g = new RectangleGeometry(new Rect(0, 0, GameModel.GameWidth, GameModel.GameHeight));
-                BackGround = new GeometryDrawing(BackGroundBrush, null, g);
+                backGround = new GeometryDrawing(BackGroundBrush, null, g);
             }
-            return BackGround;
+            return backGround;
         }
     }
 }

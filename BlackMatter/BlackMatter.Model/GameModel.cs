@@ -13,8 +13,8 @@ namespace BlackMatter.Model
         public List<Enemy> enemies { get; set; }
         public List<Bullet> PlayerBullets { get; set; }
         public List<Bullet> EnemyBullets { get; set; }
-        public static double GameWidth { get { return 1000; } }
-        public static double GameHeight { get { return 1000; } }
+        public static double GameWidth { get { return 800; } }
+        public static double GameHeight { get { return 800; } }
         public int Wave { get; set; }
         public int Enemiesinthiswave { get; set; }
 

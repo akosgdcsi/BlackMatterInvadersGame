@@ -13,8 +13,8 @@ namespace BlackMatter.Logic.Interfaces
         IGameModel InitModel();
         void PlayerMove(int dx);
         void EnemyMove();
-        void Shoot();
-        void BulletMove();
+        Bullet Shoot();
+        void BulletMove(ref Bullet bullet);
         void Enemyshoot();
         void EnemyBulletMove();
         void EnemyDies(Enemy enemy);

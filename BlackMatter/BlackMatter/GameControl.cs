@@ -46,11 +46,10 @@ namespace BlackMatter
             }
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
             dispatcherTimer.Tick += DispatcherTimer_Tick;                       
-            enemyMover.Interval = TimeSpan.FromMilliseconds(1000);
+            enemyMover.Interval = TimeSpan.FromMilliseconds(3000);
             enemyMover.Tick += EnemyMover_Tick;
-            bulletMover.Interval = TimeSpan.FromMilliseconds(5);
-            bulletMover.Tick += BulletMover_Tick;
-            bulletMover.Start();
+            
+            
             enemyMover.Start();
             dispatcherTimer.Start();
 
@@ -58,10 +57,20 @@ namespace BlackMatter
 
             InvalidateVisual();
         }
-
+        private void PlayerShoot()
+        {
+            Bullet bullet = logic.Shoot();
+            model.PlayerBullets.Add(bullet);
+            bulletMover.Interval = TimeSpan.FromMilliseconds(5);
+            bulletMover.Tick += delegate {
+                logic.BulletMove(ref bullet);
+            };
+            bulletMover.Start();
+        }
         private void BulletMover_Tick(object sender, EventArgs e)
         {
-            logic.BulletMove();
+            
+            
             InvalidateVisual();
         }
 
@@ -94,7 +103,7 @@ namespace BlackMatter
                 case Key.Right: logic.PlayerMove(10); break;
                 case Key.A: logic.PlayerMove(-10); break;
                 case Key.D: logic.PlayerMove(10); break;
-                case Key.Space: logic.Shoot(); break;
+                case Key.Space: PlayerShoot(); break;
             }
         }
 
