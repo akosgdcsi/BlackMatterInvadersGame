@@ -21,6 +21,8 @@ namespace BlackMatter
         IGameLogic logic;
         GameRenderer renderer;
         DispatcherTimer dispatcherTimer;
+        DispatcherTimer enemyMover;
+        DispatcherTimer bulletMover;
 
         public GameControl()
         {
@@ -29,7 +31,9 @@ namespace BlackMatter
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer = new DispatcherTimer();   
+            dispatcherTimer = new DispatcherTimer();
+            bulletMover = new DispatcherTimer();
+            enemyMover = new DispatcherTimer();
             this.logic =new GameLogic(model);
             model = logic.InitModel();
             renderer = new GameRenderer(model);
@@ -40,14 +44,35 @@ namespace BlackMatter
                 win.KeyDown += Win_KeyDown;
                 MouseDown += GameControl_MouseDown;
             }
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(30);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;                       
+            enemyMover.Interval = TimeSpan.FromMilliseconds(1000);
+            enemyMover.Tick += EnemyMover_Tick;
+            bulletMover.Interval = TimeSpan.FromMilliseconds(5);
+            bulletMover.Tick += BulletMover_Tick;
+            bulletMover.Start();
+            enemyMover.Start();
             dispatcherTimer.Start();
+
+
+
+            InvalidateVisual();
+        }
+
+        private void BulletMover_Tick(object sender, EventArgs e)
+        {
+            logic.EnemyMove();
+            logic.BulletMove();
+            InvalidateVisual();
+        }
+
+        private void EnemyMover_Tick(object sender, EventArgs e)
+        {            
+            logic.EnemyBulletMove();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
+        {                        
             InvalidateVisual();
         }
 
@@ -69,6 +94,7 @@ namespace BlackMatter
                 case Key.Right: logic.PlayerMove(10); break;
                 case Key.A: logic.PlayerMove(-10); break;
                 case Key.D: logic.PlayerMove(10); break;
+                case Key.Space: logic.Shoot(); break;
             }
         }
 

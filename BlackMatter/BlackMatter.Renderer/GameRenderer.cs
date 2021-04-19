@@ -25,6 +25,8 @@ namespace BlackMatter.Renderer
         Typeface font = new Typeface("Arial");
         Point textLocation = new Point(0, 1);
         Point OldPlayerPosition = new Point();
+        Point OldBulletPosition = new Point();
+        Point OldEnemyPosition = new Point();
         FormattedText formattedText;
         int oldWave = -1;
 
@@ -51,33 +53,65 @@ namespace BlackMatter.Renderer
         public Drawing BuildDrawing()
         {
             DrawingGroup dg = new DrawingGroup();
-            dg.Children.Add(GetBackground());
-            dg.Children.Add(GetBullets());
+            dg.Children.Add(GetBackground());            
             dg.Children.Add(GetPlayer());
-            dg.Children.Add(GetEnemies());           
+            dg.Children.Add(GetPlayerBullets());
+            dg.Children.Add(GetEnemies());
+            dg.Children.Add(GetEnemyBullets());
             //dg.Children.Add(GetWaves());
 
             return dg;
         }
         
 
-        private Drawing GetBullets()
+        private Drawing GetEnemyBullets()
         {
-            if (Bullet == null)
+            foreach (var item in model.EnemyBullets)
             {
-                Geometry g = new RectangleGeometry(new Rect(305, 400, 5, 5));
-                Enemy = new GeometryDrawing(Brushes.Red, null, g);
+                if (Bullet == null || OldBulletPosition.Y != item.Y)
+                {
+                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 5, 5));
+                    Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
+                    OldBulletPosition = new Point(item.X, item.Y);
+                }
             }
-            return Enemy;
+            return Bullet;
+        }
+        private Drawing GetPlayerBullets()
+        {
+            foreach (var item in model.PlayerBullets)
+            {
+                if (Bullet == null || OldBulletPosition.Y != item.Y)
+                {
+                    Geometry g = new RectangleGeometry(new Rect(item.X+22.5, item.Y-3, 5, 5));
+                    Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
+                    OldBulletPosition = new Point(item.X, item.Y);
+                }
+            }
+            if (Bullet ==null)
+            {
+                Geometry g = new RectangleGeometry(new Rect(-1, -1, 5, 5));
+                Bullet = new GeometryDrawing(Brushes.Yellow, null, g);
+            }
+            return Bullet;
         }
 
         private Drawing GetEnemies()
         {
-            if (Enemy == null)
+            
+            foreach(var item in model.enemies)
             {
-                Geometry g = new RectangleGeometry(new Rect(300, 400, 25, 25));
-                Enemy = new GeometryDrawing(Brushes.Red, null, g);
+                if (Enemy == null || OldEnemyPosition.Y!= item.Y)
+                {
+                    Geometry g = new RectangleGeometry(new Rect(item.X, item.Y, 50, 50));
+                    Enemy = new GeometryDrawing(Brushes.Red, null, g);
+
+                    OldEnemyPosition = new Point(item.X, item.Y);
+                    return Enemy;
+                }
             }
+                
+            
             return Enemy;
         }
 

@@ -25,10 +25,10 @@ namespace BlackMatter.Logic
         public IGameModel InitModel()
         {
             model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
-            Margin = GameModel.GameWidth / 8;
-            Space=GameModel.GameWidth/5-2*Margin;
-            model.enemies = EnemyPlacer();
+            Margin = GameModel.GameWidth / 20;
+            Space=(GameModel.GameWidth/5)-(2*Margin);
             model.Enemiesinthiswave = model.Wave * 50;
+            model.enemies = EnemyPlacer();            
             return model;
         }
 
@@ -37,13 +37,13 @@ namespace BlackMatter.Logic
             
             List<Enemy> enemies = new List<Enemy>();
             //Wavenkent 50 enemy
-            Enemy enemy = new Enemy(Margin + Space / 5,0);
+            Enemy enemy = new Enemy(Margin + (Space / 5),10);
             enemies.Add(enemy);
                                    
-            enemyrow = rnd.Next(1,3);
-            for (int y = 1; y < enemyrow; y++)
+            enemyrow = rnd.Next(2,6);
+            for (int y = 1; y <= enemyrow; y++)
             {
-                Enemy enemy1 = new Enemy(Space / 5 * y,0);
+                Enemy enemy1 = new Enemy(Space / 5 * y,10);
                 enemies.Add(enemy1);                
             }
 
