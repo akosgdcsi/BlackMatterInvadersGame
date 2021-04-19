@@ -53,7 +53,8 @@ namespace BlackMatter.Renderer
         Brush Player_hp1_Brush { get { return GetBrush("player_hp1.png"); } }
         Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
         Brush BulletBrush { get { return GetBrush("player_laser_1.png"); } }
-        Brush ExplosionBrush { get { return GetBrush("enemy_eyplosion.png"); } }
+        Brush ExplosionBrush { get { return GetBrush("enemy_explosion.png"); } }
+        Brush BackGroundBrush { get { return GetBrush("background.png"); } }
 
         public Drawing BuildDrawing()
         {
@@ -155,7 +156,7 @@ namespace BlackMatter.Renderer
             if (BackGround == null)
             {
                 Geometry g = new RectangleGeometry(new Rect(0, 0, GameModel.GameWidth, GameModel.GameHeight));
-                BackGround = new GeometryDrawing(Brushes.Black, null, g);
+                BackGround = new GeometryDrawing(BackGroundBrush, null, g);
             }
             return BackGround;
         }
