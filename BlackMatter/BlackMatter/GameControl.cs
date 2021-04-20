@@ -46,7 +46,7 @@ namespace BlackMatter
             }
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
             dispatcherTimer.Tick += DispatcherTimer_Tick;                       
-            enemyMover.Interval = TimeSpan.FromMilliseconds(500);
+            enemyMover.Interval = TimeSpan.FromMilliseconds(3000);
             enemyMover.Tick += EnemyMover_Tick;
             
             

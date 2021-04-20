@@ -30,6 +30,7 @@ namespace BlackMatter.Logic
             return model;
         }
 
+
         private List<Enemy> EnemyPlacer()
         {
             double[] xplace = new double[8];
