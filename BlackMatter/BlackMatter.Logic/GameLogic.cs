@@ -15,7 +15,7 @@ namespace BlackMatter.Logic
         IGameModel model;
         double Margin;
         double Space;
-        
+        public int EnemyInThisRow { get; set; }
         public GameLogic(IGameModel model)
         {
             this.model = model;
@@ -25,7 +25,7 @@ namespace BlackMatter.Logic
         {
             model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
             Space=GameModel.GameWidth/8;
-            model.Enemiesinthiswave = model.Wave * 10;
+            model.Enemiesinthiswave = model.Wave * 50;
             model.enemies = EnemyPlacer();            
             return model;
         }
@@ -38,9 +38,9 @@ namespace BlackMatter.Logic
             {
                 xplace[i] =(i * (GameModel.GameWidth / 8));
             }
-            int enemyrow = rnd.Next(0, 8);
-            double[] enemyplacer = new double[enemyrow];
-            for (int i = 0; i < enemyrow; i++)
+            EnemyInThisRow = rnd.Next(0, 8);
+            double[] enemyplacer = new double[EnemyInThisRow];
+            for (int i = 0; i < EnemyInThisRow; i++)
             {
                 enemyplacer[i] = xplace[rnd.Next(0, 8)];
             }
@@ -48,6 +48,7 @@ namespace BlackMatter.Logic
             foreach (var item in enemyplacer)
             {
                 enemies.Add(new Enemy(item, 10));
+                model.Enemiesinthiswave--;
             }
 
             return enemies;
@@ -71,7 +72,7 @@ namespace BlackMatter.Logic
         {
             foreach (var item in model.enemies)
             {
-                item.Y += GameModel.GameHeight / 10;
+                item.Y += GameModel.GameHeight / 14;
             }
             double[] xplace = new double[8];
 
@@ -79,9 +80,17 @@ namespace BlackMatter.Logic
             {
                 xplace[i] =(i * (GameModel.GameWidth / 8));
             }
-            int enemyrow = rnd.Next(0, 8);
-            double[] enemyplacer = new double[enemyrow];
-            for (int i = 0; i < enemyrow; i++)
+            if (model.Enemiesinthiswave < 8)
+            {
+                EnemyInThisRow = rnd.Next(0, model.Enemiesinthiswave);
+            }
+            else
+            {
+                EnemyInThisRow = rnd.Next(0, 8);
+            }
+            
+            double[] enemyplacer = new double[EnemyInThisRow];
+            for (int i = 0; i < EnemyInThisRow; i++)
             {
                 enemyplacer[i] = xplace[rnd.Next(0, 8)];
             }
@@ -89,25 +98,8 @@ namespace BlackMatter.Logic
             foreach (var item in enemyplacer)
             {
                 model.enemies.Add(new Enemy(item, 10));
+                model.Enemiesinthiswave--;
             }
-            //foreach (var item in model.enemies)
-            //{
-            //    item.Y += GameModel.GameHeight / 14;
-            //}
-            //if (model.Enemiesinthiswave > 0)
-            //{
-            //    Enemy enemy = new Enemy(Margin + Space,0);
-            //    model.enemies.Add(enemy);
-
-            //    enemyrow = rnd.Next(1, 3);
-            //    for (int y = 1; y < enemyrow; y++)
-            //    {
-            //        Enemy enemy1 = new Enemy(Space*y,0);
-            //        model.enemies.Add(enemy1);
-            //    }
-
-
-            //}
 
         }
 
