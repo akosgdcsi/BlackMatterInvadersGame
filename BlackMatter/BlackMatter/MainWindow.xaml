@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackMatter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1000">
+        Title="MainWindow" Height="800" Width="800">
     <local:GameControl/>
 </Window>

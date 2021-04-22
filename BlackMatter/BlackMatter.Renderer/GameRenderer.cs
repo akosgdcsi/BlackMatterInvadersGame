@@ -62,7 +62,7 @@ namespace BlackMatter.Renderer
         Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
         BitmapImage BulletBrush { get { return GetImage("player_laser_1.png"); } }
         Brush ExplosionBrush { get { return GetBrush("enemy_explosion.png"); } }
-        Brush BackGroundBrush { get { return GetBrush("background.png"); } }
+        Brush BackGroundBrush { get { return GetBrush("background_2.png"); } }
 
         public Drawing BuildDrawing()
         {
@@ -132,7 +132,7 @@ namespace BlackMatter.Renderer
 
                     //OldEnemyPositions = new Point(item.X, item.Y);
                     ImageDrawing box = new ImageDrawing(GetImage("enemy_1.png"), new Rect(item.X,
-                           item.Y, 100, 100));
+                           item.Y, 140, 140));
                     dg.Children.Add(box);
                 }
             }
