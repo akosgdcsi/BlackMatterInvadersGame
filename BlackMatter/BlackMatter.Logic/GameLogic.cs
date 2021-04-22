@@ -39,7 +39,7 @@ namespace BlackMatter.Logic
             {
                 xplace[i] =(i * (GameModel.GameWidth / 8));
             }
-            EnemyInThisRow = rnd.Next(0, 8);
+            EnemyInThisRow = rnd.Next(0, 6);
             double[] enemyplacer = new double[EnemyInThisRow];
             for (int i = 0; i < EnemyInThisRow; i++)
             {
@@ -101,7 +101,13 @@ namespace BlackMatter.Logic
                 model.enemies.Add(new Enemy(item, 10));
                 model.Enemiesinthiswave--;
             }
-
+            foreach (var item in model.enemies)
+            {
+                if (item.Y>GameModel.GameHeight-200)
+                {
+                    PlayerDmg();
+                }
+            }            
         }
 
         public Bullet Shoot()
@@ -176,6 +182,10 @@ namespace BlackMatter.Logic
                 model.player.Life -= 1;
             }
             
+        }
+        public void PlayerDies()
+        {
+
         }
 
     }

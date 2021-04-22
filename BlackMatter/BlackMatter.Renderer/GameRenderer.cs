@@ -20,7 +20,8 @@ namespace BlackMatter.Renderer
         Drawing player;
         Drawing enemy;
         Drawing bullet;
-        Drawing Text;
+        Drawing explosion;
+        GeometryDrawing Text;
         Pen red = new Pen(Brushes.Red, 2);
         Typeface font = new Typeface("Arial");
         Point textLocation = new Point(0, 1);
@@ -59,8 +60,8 @@ namespace BlackMatter.Renderer
         Brush Player_hp3_Brush { get { return GetBrush("player_hp3.png"); } }
         Brush Player_hp2_Brush { get { return GetBrush("player_hp2.png"); } }
         Brush Player_hp1_Brush { get { return GetBrush("player_hp1.png"); } }
-        Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
-        BitmapImage BulletBrush { get { return GetImage("player_laser_1.png"); } }
+        //Brush EnemyBrush { get { return GetBrush("enemy_1.png"); } }
+        // BitmapImage BulletBrush { get { return GetImage("player_laser_1.png"); } }
         Brush ExplosionBrush { get { return GetBrush("enemy_explosion.png"); } }
         Brush BackGroundBrush { get { return GetBrush("background_2.png"); } }
 
@@ -71,12 +72,44 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetPlayer());
             dg.Children.Add(GetPlayerBullets());
             dg.Children.Add(GetEnemies());
+            dg.Children.Add(GetExplosions());
             //dg.Children.Add(GetEnemyBullets());
-            //dg.Children.Add(GetWaves());
+            dg.Children.Add(GetWaves());
+            dg.Children.Add(GetLifes());
 
             return dg;
         }
 
+        private Drawing GetLifes()
+        {
+            formattedText = new FormattedText("Life: " + model.player.Life.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
+            Text = new GeometryDrawing(null, red, formattedText.BuildGeometry(new Point(100, 5)));
+
+            return Text;
+        }
+
+        private Drawing GetWaves()
+        {
+            formattedText = new FormattedText("Wave: " + model.Wave.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
+            Text =new GeometryDrawing(null, red, formattedText.BuildGeometry(new Point(5,5)));
+
+            return Text;
+        }
+
+        private Drawing GetExplosions()
+        {
+            DrawingGroup dg = new DrawingGroup();
+            foreach (var item in model.enemies)
+            {
+                if (item.IsShooted)
+                {
+                    ImageDrawing box = new ImageDrawing(GetImage("enemy_explosion.png"), new Rect(item.X, item.Y, 140, 140));
+                    dg.Children.Add(box);
+                }
+            }
+            explosion = dg;
+            return explosion;
+        }
 
         private Drawing GetEnemyBullets()
         {
@@ -143,21 +176,22 @@ namespace BlackMatter.Renderer
 
         private Drawing GetPlayer()
         {
-            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life==3)
+            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life==3)
             {
+                //ImageDrawing image = new ImageDrawing(GetImage("player_hp3.png"), new Rect(model.player.X, model.player.Y, 80,80));
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp3_Brush, null, g);
                 
                 OldPlayerPosition = new Point(model.player.X,model.player.Y);
             }
-            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 2)
+            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 2)
             {
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp2_Brush, null, g);
 
                 OldPlayerPosition = new Point(model.player.X, model.player.Y);
             }
-            if (player == null || OldPlayerPosition.X != model.player.X || model.player.Life == 1)
+            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 1)
             {
                 Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp1_Brush, null, g);
