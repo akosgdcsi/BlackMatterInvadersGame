@@ -99,10 +99,10 @@ namespace BlackMatter
         {
             switch(e.Key)
             {
-                case Key.Left: logic.PlayerMove(-10); break;
-                case Key.Right: logic.PlayerMove(10); break;
-                case Key.A: logic.PlayerMove(-10); break;
-                case Key.D: logic.PlayerMove(10); break;
+                case Key.Left: logic.PlayerMove(-25); break;
+                case Key.Right: logic.PlayerMove(25); break;
+                case Key.A: logic.PlayerMove(-50); break;
+                case Key.D: logic.PlayerMove(50); break;
                 case Key.Space: PlayerShoot(); break;
             }
         }

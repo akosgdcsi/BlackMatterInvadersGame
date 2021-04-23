@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BlackMatter.Repository.Interfaces
 {
-    public interface IStorageRepository<T> where T : class
+    public interface ISaveInstanceRepository : IStorageRepository<GameModel>
     {
-        void Insert(T obj);
+        GameModel LoadGame();
     }
 }
