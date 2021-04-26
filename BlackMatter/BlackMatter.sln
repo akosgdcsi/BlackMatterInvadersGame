@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter", "BlackMatter\BlackMatter.csproj", "{3930AE6E-1275-4472-8314-1E1D28ABE6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter", "BlackMatter\BlackMatter.csproj", "{3930AE6E-1275-4472-8314-1E1D28ABE6DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Model", "BlackMatter.Model\BlackMatter.Model.csproj", "{87BD5816-2064-4810-AC24-E8765B9F401D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter.Model", "BlackMatter.Model\BlackMatter.Model.csproj", "{87BD5816-2064-4810-AC24-E8765B9F401D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Logic", "BlackMatter.Logic\BlackMatter.Logic.csproj", "{19BAF603-E0F7-45A9-9A45-56790A90BFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter.Logic", "BlackMatter.Logic\BlackMatter.Logic.csproj", "{19BAF603-E0F7-45A9-9A45-56790A90BFF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Renderer", "BlackMatter.Renderer\BlackMatter.Renderer.csproj", "{3C3E225B-BE3D-4AA3-9883-4596FC45ADC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatterRenderer", "BlackMatter.Renderer\BlackMatterRenderer.csproj", "{3C3E225B-BE3D-4AA3-9883-4596FC45ADC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Repository", "BlackMatter.Repository\BlackMatter.Repository.csproj", "{7F0522A5-CC58-4F01-879E-DE9B3E8E256E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMatter.Repository", "BlackMatter.Repository\BlackMatter.Repository.csproj", "{7F0522A5-CC58-4F01-879E-DE9B3E8E256E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMatter.Logic.Test", "BlackMatter.Logic.Test\BlackMatter.Logic.Test.csproj", "{0458B123-B24C-497F-A251-73E1041BCD18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7F0522A5-CC58-4F01-879E-DE9B3E8E256E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F0522A5-CC58-4F01-879E-DE9B3E8E256E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F0522A5-CC58-4F01-879E-DE9B3E8E256E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0458B123-B24C-497F-A251-73E1041BCD18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0458B123-B24C-497F-A251-73E1041BCD18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0458B123-B24C-497F-A251-73E1041BCD18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0458B123-B24C-497F-A251-73E1041BCD18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

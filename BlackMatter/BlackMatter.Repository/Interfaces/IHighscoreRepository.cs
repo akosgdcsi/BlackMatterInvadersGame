@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BlackMatter.Repository.Interfaces
 {
-    public interface IStorageRepository<T> where T : class
+    public interface IHighscoreRepository : IStorageRepository<Highscore>
     {
-        void Insert(T obj);
+        IQueryable<Highscore> GetAll();
     }
 }

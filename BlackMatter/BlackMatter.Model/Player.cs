@@ -10,5 +10,9 @@ namespace BlackMatter.Model
     {
         public int Life { get; set; }
 
+        public Player(double x, double y, int life) :base( x,y)
+        {
+            Life = life;
+        }
     }
 }

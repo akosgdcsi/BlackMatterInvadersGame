@@ -10,5 +10,9 @@ namespace BlackMatter.Model
     {
         public bool IsShooted { get; set; }
 
+        public Enemy(double x ,double y, bool isShooted = false):base(x,y)
+        {
+            IsShooted = IsShooted;
+        }
     }
 }
