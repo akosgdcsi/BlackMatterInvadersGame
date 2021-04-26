@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlackMatter.Logic\BlackMatter.Logic.csproj" />
+    <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
+    <ProjectReference Include="..\BlackMatter.Renderer\BlackMatterRenderer.csproj" />
+  </ItemGroup>
+
+</Project>
