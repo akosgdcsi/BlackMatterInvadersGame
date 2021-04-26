@@ -27,6 +27,10 @@ namespace BlackMatter.Model
             this.Wave = Wave;
             
         }
+        public GameModel()
+        {
+
+        }
         
     }
 }
