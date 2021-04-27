@@ -26,7 +26,8 @@ namespace BlackMatter.Logic
             model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150,100,100,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
             Space=GameModel.GameWidth/8;
             model.Enemiesinthiswave = model.Wave * 50;
-            model.enemies = EnemyPlacer();            
+            model.enemies = EnemyPlacer();
+            model.Score = this.Score;
             return model;
         }
 
@@ -131,7 +132,7 @@ namespace BlackMatter.Logic
                     EnemyDies(item);
                     bullet.Timer.Stop();
                     model.PlayerBullets.Remove(bullet);
-                    Score += 100;
+                    model.Score += 100;
                 }
             }
         }
@@ -143,7 +144,7 @@ namespace BlackMatter.Logic
 
             Bullet bullet = new Bullet(q1.X, q1.Y - 1);
             model.EnemyBullets.Add(bullet);
-        }
+        }//DELETABLE?
         public Bullet Enemyshoot2()
         {
             var q1 = (from x in model.enemies
@@ -173,7 +174,7 @@ namespace BlackMatter.Logic
                     model.EnemyBullets.Remove(item);
                 }
             }
-        }
+        }//DELETABLE?
         public void EnemyBulletMove2(ref Bullet bullet)
         {
                 if (bullet.Y < GameModel.GameHeight)

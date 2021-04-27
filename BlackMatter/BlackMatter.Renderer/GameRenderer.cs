@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace BlackMatter.Renderer
 {
@@ -21,6 +22,7 @@ namespace BlackMatter.Renderer
         Drawing enemy;
         Drawing bullet;
         Drawing explosion;
+        Drawing button;
         GeometryDrawing Text;
         Pen red = new Pen(Brushes.Red, 2);
         Typeface font = new Typeface("Arial");
@@ -76,9 +78,19 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetEnemyBullets());
             dg.Children.Add(GetWaves());
             dg.Children.Add(GetLifes());
+            dg.Children.Add(GetScore());
 
             return dg;
         }
+
+        private Drawing GetScore()
+        {
+            formattedText = new FormattedText("Score: " + model.Score.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
+            Text = new GeometryDrawing(null, red, formattedText.BuildGeometry(new Point(180, 5)));
+
+            return Text;
+        }
+        
 
         private Drawing GetLifes()
         {

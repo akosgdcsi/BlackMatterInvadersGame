@@ -18,5 +18,6 @@ namespace BlackMatter.Model.Interfaces
         public static double GameHeight { get { return 1000; } }
         public int Wave { get; set; }
         public int Enemiesinthiswave { get; set; }
+        public int Score { get; set; }
     }
 }

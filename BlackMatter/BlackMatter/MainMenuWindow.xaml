@@ -6,5 +6,12 @@
         xmlns:local="clr-namespace:BlackMatter"
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="800" Width="800">
-    <local:MenuControl/>
+    <Grid >
+        <Button Content="New Game" HorizontalAlignment="Left" Margin="427,265,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="NewGameClick" />
+        <Button Content="Load Game" HorizontalAlignment="Left" Margin="427,348,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" />
+        <Button Content="High Score" HorizontalAlignment="Left" Margin="427,418,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="HighScoreWin" />
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="427,489,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ExitClick" />
+        
+
+    </Grid>
 </Window>
