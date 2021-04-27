@@ -14,5 +14,9 @@ namespace BlackMatter.Model
         {
             IsShooted = IsShooted;
         }
+        public Enemy(double x, double y, int width, int height) :base(x,y,width,height)
+        {
+
+        }
     }
 }

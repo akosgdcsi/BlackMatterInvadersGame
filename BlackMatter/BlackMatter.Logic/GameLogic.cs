@@ -48,7 +48,7 @@ namespace BlackMatter.Logic
             List<Enemy> enemies = new List<Enemy>();
             foreach (var item in enemyplacer)
             {
-                enemies.Add(new Enemy(item, 10));
+                enemies.Add(new Enemy(item, 10,140,140));
                 model.Enemiesinthiswave--;
             }
 
@@ -74,6 +74,7 @@ namespace BlackMatter.Logic
             foreach (var item in model.enemies)
             {
                 item.Y += GameModel.GameHeight / 14;
+                item.hitbox.Y = (int)item.Y;
             }
             double[] xplace = new double[8];
 
@@ -98,7 +99,7 @@ namespace BlackMatter.Logic
             
             foreach (var item in enemyplacer)
             {
-                model.enemies.Add(new Enemy(item, 10));
+                model.enemies.Add(new Enemy(item, 10,140,140));
                 model.Enemiesinthiswave--;
             }
             foreach (var item in model.enemies)
@@ -112,14 +113,22 @@ namespace BlackMatter.Logic
 
         public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1);
+            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1,50,50);
 
             return bullet;
         }
 
         public void BulletMove(ref Bullet bullet)
         {
-                bullet.Y -= 5;
+            bullet.Y -= 5;
+            bullet.hitbox.Y = (int)bullet.Y;
+            foreach (var item in model.enemies.ToList())
+            {
+                if (bullet.Collide(item))
+                {
+                    EnemyDies(item);
+                }
+            }
         }
         public void Enemyshoot()
         {

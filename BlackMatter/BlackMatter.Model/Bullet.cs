@@ -13,5 +13,9 @@ namespace BlackMatter.Model
         {
             IsCollided = isCollided;
         }
+        public Bullet(double x, double y, int width, int height) : base(x, y, width, height)
+        {
+
+        }
     }
 }
