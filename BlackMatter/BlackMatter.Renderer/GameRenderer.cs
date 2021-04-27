@@ -73,7 +73,7 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetPlayerBullets());
             dg.Children.Add(GetEnemies());
             dg.Children.Add(GetExplosions());
-            //dg.Children.Add(GetEnemyBullets());
+            dg.Children.Add(GetEnemyBullets());
             dg.Children.Add(GetWaves());
             dg.Children.Add(GetLifes());
 

@@ -23,6 +23,7 @@ namespace BlackMatter
         DispatcherTimer dispatcherTimer;
         DispatcherTimer enemyMover;
         DispatcherTimer bulletMover;
+        DispatcherTimer enemybulletMove;
 
         public GameControl()
         {
@@ -34,6 +35,7 @@ namespace BlackMatter
             dispatcherTimer = new DispatcherTimer();
             bulletMover = new DispatcherTimer();
             enemyMover = new DispatcherTimer();
+            enemybulletMove = new DispatcherTimer();
             this.logic =new GameLogic(model);
             model = logic.InitModel();
             renderer = new GameRenderer(model);
@@ -48,8 +50,10 @@ namespace BlackMatter
             dispatcherTimer.Tick += DispatcherTimer_Tick;                       
             enemyMover.Interval = TimeSpan.FromMilliseconds(2000);
             enemyMover.Tick += EnemyMover_Tick;
-            
-            
+            enemybulletMove.Interval = TimeSpan.FromMilliseconds(4000);
+            enemybulletMove.Tick += EnemybulletMove_Tick;
+
+            enemybulletMove.Start();
             enemyMover.Start();
             dispatcherTimer.Start();
 
@@ -57,15 +61,45 @@ namespace BlackMatter
 
             InvalidateVisual();
         }
+
+        private void EnemybulletMove_Tick(object sender, EventArgs e)
+        {
+            EnemyShoot();
+            InvalidateVisual();
+        }
+
+        private void EnemyShoot_Tick(object sender, EventArgs e)
+        {
+            logic.Enemyshoot();
+            InvalidateVisual();
+        }
+
         private void PlayerShoot()
         {
             Bullet bullet = logic.Shoot();
             model.PlayerBullets.Add(bullet);
-            bulletMover.Interval = TimeSpan.FromMilliseconds(5);
-            bulletMover.Tick += delegate {
+            bullet.Timer = new DispatcherTimer();
+            bullet.Timer.Interval = TimeSpan.FromMilliseconds(30);
+            bullet.Timer.Tick += delegate {
                 logic.BulletMove(ref bullet);
             };
-            bulletMover.Start();
+            bullet.Timer.Start();
+        }
+        private void EnemyShoot()
+        {
+            if (model.enemies.Count !=0)
+            {
+                Bullet bullet = logic.Enemyshoot2();
+                model.EnemyBullets.Add(bullet);
+                bullet.Timer = new DispatcherTimer();
+                bullet.Timer.Interval = TimeSpan.FromMilliseconds(5);
+                bullet.Timer.Tick += delegate {
+                    logic.EnemyBulletMove2(ref bullet);
+                };
+                bullet.Timer.Start();
+            }
+            
+
         }
         private void BulletMover_Tick(object sender, EventArgs e)
         {
