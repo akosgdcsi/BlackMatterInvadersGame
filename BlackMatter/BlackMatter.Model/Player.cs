@@ -14,5 +14,9 @@ namespace BlackMatter.Model
         {
             Life = life;
         }
+        public Player(double x, double y, int width, int height, int life) : base(x, y, width, height)
+        {
+            Life = life;
+        }
     }
 }

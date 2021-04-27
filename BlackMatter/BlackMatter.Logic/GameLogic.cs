@@ -13,7 +13,6 @@ namespace BlackMatter.Logic
     {
         Random rnd = new Random();
         IGameModel model;
-        double Margin;
         double Space;
         public int EnemyInThisRow { get; set; }
         public GameLogic(IGameModel model)
