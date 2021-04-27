@@ -1,21 +1,28 @@
-﻿// <copyright file="Test.cs" company="PlaceholderCompany">
+﻿// <copyright file="LogicTest.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace BlackMatter.LogicTest
 {
     using System.Collections.Generic;
+    using BlackMatter.Logic;
     using BlackMatter.Logic.Interfaces;
     using BlackMatter.Model;
     using Moq;
     using NUnit.Framework;
 
+    /// <summary>
+    /// Documentation of the public LogicTest class.
+    /// </summary>
     [TestFixture]
     public class LogicTest
     {
         private static IGameLogic gameLogic;
         private static Mock<GameModel> modelMock;
 
+        /// <summary>
+        /// init test objects.
+        /// </summary>
         [SetUp]
         public void Init()
         {
@@ -42,6 +49,9 @@ namespace BlackMatter.LogicTest
             gameLogic = new GameLogic(modelMock.Object);
         }
 
+        /// <summary>
+        /// tests player movemnet.
+        /// </summary>
         [Test]
         public void PlayerMove()
         {
@@ -52,6 +62,9 @@ namespace BlackMatter.LogicTest
             Assert.That(modelMock.Object.player.X, Is.EqualTo(expectedPlayerX));
         }
 
+        /// <summary>
+        /// tests enemy movement.
+        /// </summary>
         [Test]
         public void EnemyMove()
         {
@@ -62,6 +75,9 @@ namespace BlackMatter.LogicTest
             Assert.That(modelMock.Object.enemies[0].Y, Is.EqualTo(expectedposition));
         }
 
+        /// <summary>
+        /// tests player shooting.
+        /// </summary>
         [Test]
         public void Shoot()
         {
@@ -74,6 +90,9 @@ namespace BlackMatter.LogicTest
             Assert.That(b.Y, Is.EqualTo(expectedbulletpositionY));
         }
 
+        /// <summary>
+        /// tests player bullet movement.
+        /// </summary>
         [Test]
         public void BulletMove()
         {
@@ -86,6 +105,9 @@ namespace BlackMatter.LogicTest
             Assert.That(b.Y, Is.EqualTo(expectedbulletposition));
         }
 
+        /// <summary>
+        /// tests player bullet movement.
+        /// </summary>
         [Test]
         public void EnemyBulletMove()
         {
