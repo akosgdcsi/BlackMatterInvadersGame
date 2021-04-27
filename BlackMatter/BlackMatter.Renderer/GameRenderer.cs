@@ -118,7 +118,7 @@ namespace BlackMatter.Renderer
             {
                 if (bullet == null || !OldBulletPositions.Select(x => x.Y).Contains(item.Y))
                 {
-                    ImageDrawing box = new ImageDrawing(GetImage("player_laser_1.png"), new Rect(item.X,
+                    ImageDrawing box = new ImageDrawing(GetImage("enemy_laser.png"), new Rect(item.X,
                            item.Y, 50, 50));
                     dg.Children.Add(box);
                 }
@@ -198,7 +198,13 @@ namespace BlackMatter.Renderer
 
                 OldPlayerPosition = new Point(model.player.X, model.player.Y);
             }
+            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 0)
+            {
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                player = new GeometryDrawing(ExplosionBrush, null, g);
 
+                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+            }
             return player;
         }
 
