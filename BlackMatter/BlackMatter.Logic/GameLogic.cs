@@ -13,9 +13,9 @@ namespace BlackMatter.Logic
     {
         Random rnd = new Random();
         IGameModel model;
-        double Margin;
         double Space;
         public int EnemyInThisRow { get; set; }
+        public int Score { get; set; }
         public GameLogic(IGameModel model)
         {
             this.model = model;
@@ -23,7 +23,7 @@ namespace BlackMatter.Logic
 
         public IGameModel InitModel()
         {
-            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
+            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,140,140,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
             Space=GameModel.GameWidth/8;
             model.Enemiesinthiswave = model.Wave * 50;
             model.enemies = EnemyPlacer();            
@@ -48,7 +48,7 @@ namespace BlackMatter.Logic
             List<Enemy> enemies = new List<Enemy>();
             foreach (var item in enemyplacer)
             {
-                enemies.Add(new Enemy(item, 10));
+                enemies.Add(new Enemy(item, 10,140,140));
                 model.Enemiesinthiswave--;
             }
 
@@ -58,6 +58,7 @@ namespace BlackMatter.Logic
         public void PlayerMove(int dx)
         {
             int newx = (int)(model.player.X + dx);
+            
             if  (newx<0)
             {
                 newx = (int)GameModel.GameWidth-50;
@@ -67,6 +68,7 @@ namespace BlackMatter.Logic
                 newx = 0;
             }
             model.player.X = newx;
+            model.player.hitbox.X = newx;
         }
 
         public void EnemyMove()
@@ -74,6 +76,7 @@ namespace BlackMatter.Logic
             foreach (var item in model.enemies)
             {
                 item.Y += GameModel.GameHeight / 14;
+                item.hitbox.Y = (int)item.Y;
             }
             double[] xplace = new double[8];
 
@@ -98,7 +101,7 @@ namespace BlackMatter.Logic
             
             foreach (var item in enemyplacer)
             {
-                model.enemies.Add(new Enemy(item, 10));
+                model.enemies.Add(new Enemy(item, 10,140,140));
                 model.Enemiesinthiswave--;
             }
             foreach (var item in model.enemies)
@@ -112,14 +115,25 @@ namespace BlackMatter.Logic
 
         public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1);
+            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1,8,60);
 
             return bullet;
         }
 
         public void BulletMove(ref Bullet bullet)
         {
-                bullet.Y -= 5;
+            bullet.Y -= 5;
+            bullet.hitbox.Y = (int)bullet.Y;
+            foreach (var item in model.enemies.ToList())
+            {
+                if (bullet.Collide(item))
+                {
+                    EnemyDies(item);
+                    bullet.Timer.Stop();
+                    model.PlayerBullets.Remove(bullet);
+                    Score += 100;
+                }
+            }
         }
         public void Enemyshoot()
         {
@@ -130,19 +144,54 @@ namespace BlackMatter.Logic
             Bullet bullet = new Bullet(q1.X, q1.Y - 1);
             model.EnemyBullets.Add(bullet);
         }
+        public Bullet Enemyshoot2()
+        {
+            var q1 = (from x in model.enemies
+                      where x == ClosestEnemy()
+                      select x).FirstOrDefault();
+
+            Bullet bullet = new Bullet(q1.X, q1.Y - 1,8,60);
+            return bullet;
+        }
         public void EnemyBulletMove()
         {
             foreach (var item in model.EnemyBullets)
             {
                 if (item.Y < GameModel.GameHeight)
                 {
-                    item.Y += 0.5;
+                    item.Y += 1;
+                    item.hitbox.Y = (int)item.Y;
+                    if (item.Collide(model.player))
+                    {
+                        PlayerDmg();
+                        
+
+                    }
                 }
                 else
                 {
                     model.EnemyBullets.Remove(item);
                 }
             }
+        }
+        public void EnemyBulletMove2(ref Bullet bullet)
+        {
+                if (bullet.Y < GameModel.GameHeight)
+                {
+                    bullet.Y += 1;
+                    bullet.hitbox.Y = (int)bullet.Y;
+                    if (bullet.Collide(model.player))
+                    {
+                        PlayerDmg();
+                        bullet.Timer.Stop();
+                        model.EnemyBullets.Remove(bullet);
+                    }
+                }
+                else
+                {
+                    model.EnemyBullets.Remove(bullet);
+                }
+            
         }
         private Enemy ClosestEnemy()
         {
@@ -186,6 +235,11 @@ namespace BlackMatter.Logic
         public void PlayerDies()
         {
 
+        }
+        public void NextWave()
+        {
+            model.Wave++;
+            model.Enemiesinthiswave = model.Wave * 50;
         }
 
     }
