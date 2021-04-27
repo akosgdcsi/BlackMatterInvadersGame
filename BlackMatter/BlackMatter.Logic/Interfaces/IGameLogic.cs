@@ -16,7 +16,9 @@ namespace BlackMatter.Logic.Interfaces
         Bullet Shoot();
         void BulletMove(ref Bullet bullet);
         void Enemyshoot();
+        Bullet Enemyshoot2();
         void EnemyBulletMove();
+        void EnemyBulletMove2(ref Bullet bullet);
         void EnemyDies(Enemy enemy);
         void PlayerDmg();
     }
