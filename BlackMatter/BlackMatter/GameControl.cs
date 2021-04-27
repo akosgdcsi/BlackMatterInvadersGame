@@ -101,12 +101,6 @@ namespace BlackMatter
             
 
         }
-        private void BulletMover_Tick(object sender, EventArgs e)
-        {
-            
-            
-            InvalidateVisual();
-        }
 
         private void EnemyMover_Tick(object sender, EventArgs e)
         {

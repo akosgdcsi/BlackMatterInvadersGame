@@ -115,7 +115,7 @@ namespace BlackMatter.Logic
 
         public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1,50,50);
+            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1,8,60);
 
             return bullet;
         }
@@ -150,7 +150,7 @@ namespace BlackMatter.Logic
                       where x == ClosestEnemy()
                       select x).FirstOrDefault();
 
-            Bullet bullet = new Bullet(q1.X, q1.Y - 1,50,50);
+            Bullet bullet = new Bullet(q1.X, q1.Y - 1,8,60);
             return bullet;
         }
         public void EnemyBulletMove()
