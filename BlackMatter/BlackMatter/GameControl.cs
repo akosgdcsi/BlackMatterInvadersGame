@@ -56,12 +56,27 @@ namespace BlackMatter
             enemybulletMove.Start();
             enemyMover.Start();
             dispatcherTimer.Start();
-
+            
 
 
             InvalidateVisual();
         }
 
+        private void GameOver()
+        {
+            if(model.player.Life==0)
+            {
+                dispatcherTimer.Stop();
+                enemyMover.Stop();
+                enemybulletMove.Stop();
+                MessageBox.Show("Game Over!\n\nHighscore: "+model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
+                Window win = Window.GetWindow(this);
+                win.Close();
+                MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                mainMenuWindow.Show();
+            }
+            
+        }
         private void EnemybulletMove_Tick(object sender, EventArgs e)
         {
             EnemyShoot();
@@ -109,7 +124,8 @@ namespace BlackMatter
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {                        
+        {
+            GameOver();
             InvalidateVisual();
         }
 

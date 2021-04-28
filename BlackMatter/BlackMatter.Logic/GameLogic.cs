@@ -23,10 +23,11 @@ namespace BlackMatter.Logic
 
         public IGameModel InitModel()
         {
-            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 200,140,140,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
+            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150,100,100,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
             Space=GameModel.GameWidth/8;
             model.Enemiesinthiswave = model.Wave * 50;
-            model.enemies = EnemyPlacer();            
+            model.enemies = EnemyPlacer();
+            model.Score = this.Score;
             return model;
         }
 
@@ -48,7 +49,7 @@ namespace BlackMatter.Logic
             List<Enemy> enemies = new List<Enemy>();
             foreach (var item in enemyplacer)
             {
-                enemies.Add(new Enemy(item, 10,140,140));
+                enemies.Add(new Enemy(item, 10, 50,50));
                 model.Enemiesinthiswave--;
             }
 
@@ -101,7 +102,7 @@ namespace BlackMatter.Logic
             
             foreach (var item in enemyplacer)
             {
-                model.enemies.Add(new Enemy(item, 10,140,140));
+                model.enemies.Add(new Enemy(item, 10,50,50));
                 model.Enemiesinthiswave--;
             }
             foreach (var item in model.enemies)
@@ -131,7 +132,7 @@ namespace BlackMatter.Logic
                     EnemyDies(item);
                     bullet.Timer.Stop();
                     model.PlayerBullets.Remove(bullet);
-                    Score += 100;
+                    model.Score += 100;
                 }
             }
         }
@@ -143,14 +144,14 @@ namespace BlackMatter.Logic
 
             Bullet bullet = new Bullet(q1.X, q1.Y - 1);
             model.EnemyBullets.Add(bullet);
-        }
+        }//DELETABLE?
         public Bullet Enemyshoot2()
         {
             var q1 = (from x in model.enemies
                       where x == ClosestEnemy()
                       select x).FirstOrDefault();
 
-            Bullet bullet = new Bullet(q1.X, q1.Y - 1,8,60);
+            Bullet bullet = new Bullet(q1.X+45, q1.Y + 90,8,60);
             return bullet;
         }
         public void EnemyBulletMove()
@@ -173,7 +174,7 @@ namespace BlackMatter.Logic
                     model.EnemyBullets.Remove(item);
                 }
             }
-        }
+        }//DELETABLE?
         public void EnemyBulletMove2(ref Bullet bullet)
         {
                 if (bullet.Y < GameModel.GameHeight)
@@ -234,7 +235,10 @@ namespace BlackMatter.Logic
         }
         public void PlayerDies()
         {
-
+            if (model.player.Life==0)
+            {
+                //PLACEHOLDER FOR DEAD PLAYER
+            }
         }
         public void NextWave()
         {

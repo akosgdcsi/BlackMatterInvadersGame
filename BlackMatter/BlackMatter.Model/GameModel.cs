@@ -17,6 +17,7 @@ namespace BlackMatter.Model
         public static double GameHeight { get { return 800; } }
         public int Wave { get; set; }
         public int Enemiesinthiswave { get; set; }
+        public int Score { get; set; }
 
         public GameModel(Player player, List<Enemy> enemies, List<Bullet> playerBullets, List<Bullet> enemyBullets, int Wave)
         {

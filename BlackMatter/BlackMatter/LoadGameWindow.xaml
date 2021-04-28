@@ -1,0 +1,13 @@
+﻿<Window x:Class="BlackMatter.LoadGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlackMatter"
+        mc:Ignorable="d"
+        Title="LoadGameWindow" Height="300" Width="450">
+    <Grid>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="379,254,0,0" VerticalAlignment="Top" Height="20" Width="61" Click="ExitClick"/>
+
+    </Grid>
+</Window>
