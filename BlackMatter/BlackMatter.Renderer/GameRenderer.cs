@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace BlackMatter.Renderer
 {
@@ -21,6 +22,7 @@ namespace BlackMatter.Renderer
         Drawing enemy;
         Drawing bullet;
         Drawing explosion;
+        Drawing button;
         GeometryDrawing Text;
         Pen red = new Pen(Brushes.Red, 2);
         Typeface font = new Typeface("Arial");
@@ -76,9 +78,19 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetEnemyBullets());
             dg.Children.Add(GetWaves());
             dg.Children.Add(GetLifes());
+            dg.Children.Add(GetScore());
 
             return dg;
         }
+
+        private Drawing GetScore()
+        {
+            formattedText = new FormattedText("Score: " + model.Score.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
+            Text = new GeometryDrawing(null, red, formattedText.BuildGeometry(new Point(180, 5)));
+
+            return Text;
+        }
+        
 
         private Drawing GetLifes()
         {
@@ -118,7 +130,7 @@ namespace BlackMatter.Renderer
             {
                 if (bullet == null || !OldBulletPositions.Select(x => x.Y).Contains(item.Y))
                 {
-                    ImageDrawing box = new ImageDrawing(GetImage("player_laser_1.png"), new Rect(item.X,
+                    ImageDrawing box = new ImageDrawing(GetImage("enemy_laser.png"), new Rect(item.X,
                            item.Y, 50, 50));
                     dg.Children.Add(box);
                 }
@@ -198,7 +210,13 @@ namespace BlackMatter.Renderer
 
                 OldPlayerPosition = new Point(model.player.X, model.player.Y);
             }
+            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 0)
+            {
+                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                player = new GeometryDrawing(ExplosionBrush, null, g);
 
+                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+            }
             return player;
         }
 
