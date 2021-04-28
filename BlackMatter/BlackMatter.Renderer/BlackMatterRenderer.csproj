@@ -10,6 +10,7 @@
     <None Remove="Images\background_2.png" />
     <None Remove="Images\enemy_1.png" />
     <None Remove="Images\enemy_explosion.png" />
+    <None Remove="Images\enemy_laser.png" />
     <None Remove="Images\player_hp1.png" />
     <None Remove="Images\player_hp2.png" />
     <None Remove="Images\player_hp3.png" />
@@ -22,6 +23,7 @@
     <EmbeddedResource Include="Images\background_2.png" />
     <EmbeddedResource Include="Images\enemy_1.png" />
     <EmbeddedResource Include="Images\enemy_explosion.png" />
+    <EmbeddedResource Include="Images\enemy_laser.png" />
     <EmbeddedResource Include="Images\player_hp1.png" />
     <EmbeddedResource Include="Images\player_hp2.png" />
     <EmbeddedResource Include="Images\player_hp3.png" />

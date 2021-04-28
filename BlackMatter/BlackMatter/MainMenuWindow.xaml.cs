@@ -24,5 +24,27 @@ namespace BlackMatter
             InitializeComponent();
         }
 
+        private void NewGameClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            if (mainWindow.ShowDialog()==true)
+            {
+                mainWindow.Show();             
+            }
+        }
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void HighScoreWin(object sender, RoutedEventArgs e)
+        {
+            HighScoreWindow scoreWindow = new HighScoreWindow();
+            if (scoreWindow.ShowDialog()==true)
+            {
+                scoreWindow.Show();
+            }
+        }
     }
 }
