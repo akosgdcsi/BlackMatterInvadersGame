@@ -1,250 +1,294 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlackMatter.Logic.Interfaces;
-using BlackMatter.Model;
-using BlackMatter.Model.Interfaces;
+﻿// <copyright file="GameLogic.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter.Logic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BlackMatter.Logic.Interfaces;
+    using BlackMatter.Model;
+    using BlackMatter.Model.Interfaces;
+
+    /// <summary>
+    /// this is gamelogic class.
+    /// </summary>
     public class GameLogic : IGameLogic
     {
-        Random rnd = new Random();
-        IGameModel model;
-        double Space;
-        public int EnemyInThisRow { get; set; }
-        public int Score { get; set; }
+        private Random rnd = new Random();
+        private IGameModel model;
+        private double space;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameLogic"/> class.
+        /// </summary>
+        /// <param name="model">model instance.</param>
         public GameLogic(IGameModel model)
         {
             this.model = model;
         }
 
+        /// <summary>
+        /// Gets or sets an enemyraw.
+        /// </summary>
+        public int EnemyInThisRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets a score.
+        /// </summary>
+        public int Score { get; set; }
+
+        /// <inheritdoc/>
         public IGameModel InitModel()
         {
-            model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150,100,100,3),new List<Enemy>(),new List<Bullet>(),new List<Bullet>(),1);
-            Space=GameModel.GameWidth/8;
-            model.Enemiesinthiswave = model.Wave * 50;
-            model.enemies = EnemyPlacer();
-            model.Score = this.Score;
-            return model;
+            this.model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150, 100, 100, 3), new List<Enemy>(), new List<Bullet>(), new List<Bullet>(), 1);
+            this.space = GameModel.GameWidth / 8;
+            this.model.Enemiesinthiswave = this.model.Wave * 50;
+            this.model.enemies = this.EnemyPlacer();
+            this.model.Score = this.Score;
+            return this.model;
         }
 
-
-        private List<Enemy> EnemyPlacer()
-        {
-            double[] xplace = new double[8];
-            
-            for (int i = 0; i < xplace.Length; i++)
-            {
-                xplace[i] =(i * (GameModel.GameWidth / 8));
-            }
-            EnemyInThisRow = rnd.Next(0, 6);
-            double[] enemyplacer = new double[EnemyInThisRow];
-            for (int i = 0; i < EnemyInThisRow; i++)
-            {
-                enemyplacer[i] = xplace[rnd.Next(0, 8)];
-            }
-            List<Enemy> enemies = new List<Enemy>();
-            foreach (var item in enemyplacer)
-            {
-                enemies.Add(new Enemy(item, 10, 50,50));
-                model.Enemiesinthiswave--;
-            }
-
-            return enemies;
-        }
-
+        /// <inheritdoc/>
         public void PlayerMove(int dx)
         {
-            int newx = (int)(model.player.X + dx);
-            
-            if  (newx<0)
+            int newx = (int)(this.model.player.X + dx);
+
+            if (newx < 0)
             {
-                newx = (int)GameModel.GameWidth-50;
+                newx = (int)GameModel.GameWidth - 50;
             }
-            else if (newx>GameModel.GameWidth-50)
+            else if (newx > GameModel.GameWidth - 50)
             {
                 newx = 0;
             }
-            model.player.X = newx;
-            model.player.hitbox.X = newx;
+
+            this.model.player.X = newx;
+            this.model.player.hitbox.X = newx;
         }
 
+        /// <inheritdoc/>
         public void EnemyMove()
         {
-            foreach (var item in model.enemies)
+            foreach (var item in this.model.enemies)
             {
                 item.Y += GameModel.GameHeight / 14;
                 item.hitbox.Y = (int)item.Y;
             }
+
             double[] xplace = new double[8];
 
             for (int i = 0; i < xplace.Length; i++)
             {
-                xplace[i] =(i * (GameModel.GameWidth / 8));
+                xplace[i] = i * (GameModel.GameWidth / 8);
             }
-            if (model.Enemiesinthiswave < 8)
+
+            if (this.model.Enemiesinthiswave < 8)
             {
-                EnemyInThisRow = rnd.Next(0, model.Enemiesinthiswave);
+                this.EnemyInThisRow = this.rnd.Next(0, this.model.Enemiesinthiswave);
             }
             else
             {
-                EnemyInThisRow = rnd.Next(0, 8);
+                this.EnemyInThisRow = this.rnd.Next(0, 8);
             }
-            
-            double[] enemyplacer = new double[EnemyInThisRow];
-            for (int i = 0; i < EnemyInThisRow; i++)
+
+            double[] enemyplacer = new double[this.EnemyInThisRow];
+            for (int i = 0; i < this.EnemyInThisRow; i++)
             {
-                enemyplacer[i] = xplace[rnd.Next(0, 8)];
+                enemyplacer[i] = xplace[this.rnd.Next(0, 8)];
             }
-            
+
             foreach (var item in enemyplacer)
             {
-                model.enemies.Add(new Enemy(item, 10,50,50));
-                model.Enemiesinthiswave--;
+                this.model.enemies.Add(new Enemy(item, 10, 50, 50));
+                this.model.Enemiesinthiswave--;
             }
-            foreach (var item in model.enemies)
+
+            foreach (var item in this.model.enemies)
             {
-                if (item.Y>GameModel.GameHeight-200)
+                if (item.Y > GameModel.GameHeight - 200)
                 {
-                    PlayerDmg();
+                    this.PlayerDmg();
                 }
-            }            
+            }
         }
 
+        /// <inheritdoc/>
         public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(model.player.X + 15, model.player.Y - 1,8,60);
+            Bullet bullet = new Bullet(this.model.player.X + 15, this.model.player.Y - 1, 8, 60);
 
             return bullet;
         }
 
+        /// <inheritdoc/>
         public void BulletMove(ref Bullet bullet)
         {
             bullet.Y -= 5;
             bullet.hitbox.Y = (int)bullet.Y;
-            foreach (var item in model.enemies.ToList())
+            foreach (var item in this.model.enemies.ToList())
             {
                 if (bullet.Collide(item))
                 {
-                    EnemyDies(item);
+                    this.EnemyDies(item);
                     bullet.Timer.Stop();
-                    model.PlayerBullets.Remove(bullet);
-                    model.Score += 100;
+                    this.model.PlayerBullets.Remove(bullet);
+                    this.model.Score += 100;
                 }
             }
         }
+
+        /// <inheritdoc/>
         public void Enemyshoot()
         {
-            var q1 = (from x in model.enemies
-                 where x == ClosestEnemy()
-                 select x).FirstOrDefault();
-
-            Bullet bullet = new Bullet(q1.X, q1.Y - 1);
-            model.EnemyBullets.Add(bullet);
-        }//DELETABLE?
-        public Bullet Enemyshoot2()
-        {
-            var q1 = (from x in model.enemies
-                      where x == ClosestEnemy()
+            var q1 = (from x in this.model.enemies
+                      where x == this.ClosestEnemy()
                       select x).FirstOrDefault();
 
-            Bullet bullet = new Bullet(q1.X+45, q1.Y + 90,8,60);
+            Bullet bullet = new Bullet(q1.X, q1.Y - 1);
+            this.model.EnemyBullets.Add(bullet);
+        }// DELETABLE?
+
+        /// <inheritdoc/>
+        public Bullet Enemyshoot2()
+        {
+            var q1 = (from x in this.model.enemies
+                      where x == this.ClosestEnemy()
+                      select x).FirstOrDefault();
+
+            Bullet bullet = new Bullet(q1.X + 45, q1.Y + 90, 8, 60);
             return bullet;
         }
+
+        /// <inheritdoc/>
         public void EnemyBulletMove()
         {
-            foreach (var item in model.EnemyBullets)
+            foreach (var item in this.model.EnemyBullets)
             {
                 if (item.Y < GameModel.GameHeight)
                 {
                     item.Y += 1;
                     item.hitbox.Y = (int)item.Y;
-                    if (item.Collide(model.player))
+                    if (item.Collide(this.model.player))
                     {
-                        PlayerDmg();
-                        
-
+                        this.PlayerDmg();
                     }
                 }
                 else
                 {
-                    model.EnemyBullets.Remove(item);
+                    this.model.EnemyBullets.Remove(item);
                 }
             }
-        }//DELETABLE?
+        }// DELETABLE?
+
+        /// <inheritdoc/>
         public void EnemyBulletMove2(ref Bullet bullet)
         {
-                if (bullet.Y < GameModel.GameHeight)
+            if (bullet.Y < GameModel.GameHeight)
+            {
+                bullet.Y += 1;
+                bullet.hitbox.Y = (int)bullet.Y;
+                if (bullet.Collide(this.model.player))
                 {
-                    bullet.Y += 1;
-                    bullet.hitbox.Y = (int)bullet.Y;
-                    if (bullet.Collide(model.player))
-                    {
-                        PlayerDmg();
-                        bullet.Timer.Stop();
-                        model.EnemyBullets.Remove(bullet);
-                    }
+                    this.PlayerDmg();
+                    bullet.Timer.Stop();
+                    this.model.EnemyBullets.Remove(bullet);
                 }
-                else
-                {
-                    model.EnemyBullets.Remove(bullet);
-                }
-            
+            }
+            else
+            {
+                this.model.EnemyBullets.Remove(bullet);
+            }
         }
+
+        /// <inheritdoc/>
+        public void EnemyDies(Enemy enemy)
+        {
+            this.model.enemies.Remove(enemy);
+        }
+
+        /// <inheritdoc/>
+        public void PlayerDmg()
+        {
+            if (this.model.player.Life >= 1)
+            {
+                this.model.player.Life -= 1;
+            }
+        }
+
+        /// <summary>
+        /// saddly this thing happend.
+        /// </summary>
+        public void PlayerDies()
+        {
+            if (this.model.player.Life == 0)
+            {
+                // PLACEHOLDER FOR DEAD PLAYER
+            }
+        }
+
+        /// <summary>
+        /// sets the next wave.
+        /// </summary>
+        public void NextWave()
+        {
+            this.model.Wave++;
+            this.model.Enemiesinthiswave = this.model.Wave * 50;
+        }
+
         private Enemy ClosestEnemy()
         {
-            List<Enemy> enemies = FrontRowEnemies();
+            List<Enemy> enemies = this.FrontRowEnemies();
             double min = double.PositiveInfinity;
             Enemy closestEnemy = null;
             foreach (var item in enemies)
             {
-                if (min > Math.Sqrt(Math.Abs(model.player.X - item.X) + Math.Abs(model.player.Y - item.Y)))
+                if (min > Math.Sqrt(Math.Abs(this.model.player.X - item.X) + Math.Abs(this.model.player.Y - item.Y)))
                 {
-                    min = Math.Sqrt(Math.Abs(model.player.X - item.X) + Math.Abs(model.player.Y - item.Y));
+                    min = Math.Sqrt(Math.Abs(this.model.player.X - item.X) + Math.Abs(this.model.player.Y - item.Y));
                     closestEnemy = item;
                 }
             }
+
             return closestEnemy;
         }
+
         private List<Enemy> FrontRowEnemies()
         {
-            var q1 = (from x in model.enemies
+            var q1 = (from x in this.model.enemies
                       orderby x.Y descending
                       select x.Y).FirstOrDefault();
-             
-            return (from x in model.enemies
-                     where x.Y == q1
-                     select x).ToList();
+
+            return (from x in this.model.enemies
+                    where x.Y == q1
+                    select x).ToList();
         }
 
-        public void EnemyDies(Enemy enemy)
+        private List<Enemy> EnemyPlacer()
         {
-            model.enemies.Remove(enemy);
-        }
+            double[] xplace = new double[8];
 
-        public void PlayerDmg()
-        {
-            if (model.player.Life>=1)
+            for (int i = 0; i < xplace.Length; i++)
             {
-                model.player.Life -= 1;
+                xplace[i] = i * (GameModel.GameWidth / 8);
             }
-            
-        }
-        public void PlayerDies()
-        {
-            if (model.player.Life==0)
-            {
-                //PLACEHOLDER FOR DEAD PLAYER
-            }
-        }
-        public void NextWave()
-        {
-            model.Wave++;
-            model.Enemiesinthiswave = model.Wave * 50;
-        }
 
+            this.EnemyInThisRow = this.rnd.Next(0, 6);
+            double[] enemyplacer = new double[this.EnemyInThisRow];
+            for (int i = 0; i < this.EnemyInThisRow; i++)
+            {
+                enemyplacer[i] = xplace[this.rnd.Next(0, 8)];
+            }
+
+            List<Enemy> enemies = new List<Enemy>();
+            foreach (var item in enemyplacer)
+            {
+                enemies.Add(new Enemy(item, 10, 50, 50));
+                this.model.Enemiesinthiswave--;
+            }
+
+            return enemies;
+        }
     }
 }
