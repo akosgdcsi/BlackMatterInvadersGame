@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlackMatter.Model\BlackMatter.Model.csproj" />
+    <ProjectReference Include="..\BlackMatter.Repository\BlackMatter.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,7 @@ namespace BlackMatter
     using BlackMatter.Model;
     using BlackMatter.Model.Interfaces;
     using BlackMatter.Renderer;
+    using BlackMatter.Repository;
 
     /// <summary>
     /// gamecontrol class.
@@ -22,6 +23,7 @@ namespace BlackMatter
     {
         private IGameModel model;
         private IGameLogic logic;
+        private SaveLogic saveLogic;
         private GameRenderer renderer;
         private DispatcherTimer dispatcherTimer;
         private DispatcherTimer enemyMover;
@@ -47,12 +49,11 @@ namespace BlackMatter
             this.logic = new GameLogic(this.model);
             this.model = this.logic.InitModel();
             this.renderer = new GameRenderer(this.model);
-
             Window win = Window.GetWindow(this);
             if (win != null)
             {
                 win.KeyDown += this.Win_KeyDown;
-                this.MouseDown += this.GameControl_MouseDown;
+                win.MouseLeftButtonDown += this.Win_MouseLeftButtonDown;
             }
 
             this.dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
@@ -66,16 +67,22 @@ namespace BlackMatter
             this.enemybulletMove.Start();
             this.enemyMover.Start();
             this.dispatcherTimer.Start();
-            if (this.model.Enemiesinthiswave == 0 && this.model.Enemies.Count == 0)
-            {
-                this.enemyMover.Stop();
-                this.wait.Start();
-                this.logic.NextWave();
-                this.wait.Stop();
-                this.enemyMover.Start();
-            }
 
             this.InvalidateVisual();
+        }
+
+        private void Win_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            if (e.GetPosition(this).X >= 715 && e.GetPosition(this).X <= 795 && e.GetPosition(this).Y >= 5 && e.GetPosition(this).Y <= 35)
+            {
+                this.saveLogic = new SaveLogic(new SaveInstance(), this.model);
+                this.saveLogic.SaveInstance();
+                Window win = Window.GetWindow(this);
+                win.Close();
+                MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                mainMenuWindow.Show();
+            }
         }
 
         private void Wait_Tick(object sender, EventArgs e)
@@ -91,6 +98,10 @@ namespace BlackMatter
                 this.enemyMover.Stop();
                 this.enemybulletMove.Stop();
                 MessageBox.Show("Game Over!\n\nHighscore: " + this.model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
+
+                HighScoreRepository highScore = new HighScoreRepository();
+                this.saveLogic = new SaveLogic(highScore, this.model);
+                this.saveLogic.HighscoreInstance();
                 Window win = Window.GetWindow(this);
                 win.Close();
                 MainMenuWindow mainMenuWindow = new MainMenuWindow();

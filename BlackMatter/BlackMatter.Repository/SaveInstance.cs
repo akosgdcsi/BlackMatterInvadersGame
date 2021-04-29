@@ -7,13 +7,14 @@ namespace BlackMatter.Repository
     using System.IO;
     using System.Reflection;
     using BlackMatter.Model;
+    using BlackMatter.Model.Interfaces;
     using BlackMatter.Repository.Interfaces;
     using Newtonsoft.Json;
 
     /// <summary>
     /// saveinstance class.
     /// </summary>
-    public class SaveInstance : StorageRepository<GameModel>, ISaveInstanceRepository
+    public class SaveInstance : StorageRepository<IGameModel>, ISaveInstanceRepository
     {
         private string filename;
 
@@ -35,7 +36,7 @@ namespace BlackMatter.Repository
         }
 
         /// <inheritdoc/>
-        public override void Insert(GameModel obj)
+        public override void Insert(IGameModel obj)
         {
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             File.WriteAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}", json);

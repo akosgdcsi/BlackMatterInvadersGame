@@ -111,9 +111,9 @@ namespace BlackMatter.LogicTest
         [Test]
         public void EnemyBulletMove()
         {
-            double expectedenemybulletmoveY0 = modelMock.Object.EnemyBullets[0].Y + 0.5;
-            double expectedenemybulletmoveY1 = modelMock.Object.EnemyBullets[1].Y + 0.5;
-            double expectedenemybulletmoveY2 = modelMock.Object.EnemyBullets[2].Y + 0.5;
+            double expectedenemybulletmoveY0 = modelMock.Object.EnemyBullets[0].Y + 1;
+            double expectedenemybulletmoveY1 = modelMock.Object.EnemyBullets[1].Y + 1;
+            double expectedenemybulletmoveY2 = modelMock.Object.EnemyBullets[2].Y + 1;
 
             gameLogic.EnemyBulletMove();
 

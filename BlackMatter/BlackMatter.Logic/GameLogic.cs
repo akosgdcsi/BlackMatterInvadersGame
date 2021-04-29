@@ -10,6 +10,7 @@ namespace BlackMatter.Logic
     using BlackMatter.Logic.Interfaces;
     using BlackMatter.Model;
     using BlackMatter.Model.Interfaces;
+    using BlackMatter.Repository;
 
     /// <summary>
     /// this is gamelogic class.

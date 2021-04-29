@@ -79,10 +79,15 @@ namespace BlackMatter.Renderer
             dg.Children.Add(GetWaves());
             dg.Children.Add(GetLifes());
             dg.Children.Add(GetScore());
-
+            dg.Children.Add(GetExitButton());
             return dg;
         }
 
+        private Drawing GetExitButton()
+        {
+            GeometryDrawing exitBtn = new GeometryDrawing(Brushes.LightGray, new Pen(), new RectangleGeometry(new Rect(715, 5, 80, 30)));
+            return exitBtn;
+        }
         private Drawing GetScore()
         {
             formattedText = new FormattedText("Score: " + model.Score.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
