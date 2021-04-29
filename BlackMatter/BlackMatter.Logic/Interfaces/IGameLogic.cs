@@ -73,5 +73,10 @@ namespace BlackMatter.Logic.Interfaces
         /// removes 1 life from player if has not got any.
         /// </summary>
         void PlayerDmg();
+
+        /// <summary>
+        /// sets the next wave.
+        /// </summary>
+        void NextWave();
     }
 }

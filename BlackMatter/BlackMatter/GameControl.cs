@@ -27,6 +27,7 @@ namespace BlackMatter
         private DispatcherTimer enemyMover;
         private DispatcherTimer bulletMover;
         private DispatcherTimer enemybulletMove;
+        private DispatcherTimer wait;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameControl"/> class.
@@ -42,6 +43,7 @@ namespace BlackMatter
             this.bulletMover = new DispatcherTimer();
             this.enemyMover = new DispatcherTimer();
             this.enemybulletMove = new DispatcherTimer();
+            this.wait = new DispatcherTimer();
             this.logic = new GameLogic(this.model);
             this.model = this.logic.InitModel();
             this.renderer = new GameRenderer(this.model);
@@ -59,11 +61,25 @@ namespace BlackMatter
             this.enemyMover.Tick += this.EnemyMover_Tick;
             this.enemybulletMove.Interval = TimeSpan.FromMilliseconds(4000);
             this.enemybulletMove.Tick += this.EnemybulletMove_Tick;
-
+            this.wait.Interval = TimeSpan.FromMilliseconds(10000);
+            this.wait.Tick += this.Wait_Tick;
             this.enemybulletMove.Start();
             this.enemyMover.Start();
             this.dispatcherTimer.Start();
+            if (this.model.Enemiesinthiswave == 0 && this.model.Enemies.Count == 0)
+            {
+                this.enemyMover.Stop();
+                this.wait.Start();
+                this.logic.NextWave();
+                this.wait.Stop();
+                this.enemyMover.Start();
+            }
 
+            this.InvalidateVisual();
+        }
+
+        private void Wait_Tick(object sender, EventArgs e)
+        {
             this.InvalidateVisual();
         }
 
@@ -125,8 +141,19 @@ namespace BlackMatter
 
         private void EnemyMover_Tick(object sender, EventArgs e)
         {
-            this.logic.EnemyMove();
-            this.InvalidateVisual();
+            if (this.model.Enemiesinthiswave != 0 || this.model.Enemies.Count != 0)
+            {
+                this.logic.EnemyMove();
+                this.InvalidateVisual();
+            }
+            else
+            {
+                this.enemyMover.Stop();
+                this.wait.Start();
+                this.logic.NextWave();
+                this.wait.Stop();
+                this.enemyMover.Start();
+            }
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
