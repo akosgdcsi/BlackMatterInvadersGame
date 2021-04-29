@@ -73,7 +73,6 @@ namespace BlackMatter
 
         private void Win_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             if (e.GetPosition(this).X >= 715 && e.GetPosition(this).X <= 795 && e.GetPosition(this).Y >= 5 && e.GetPosition(this).Y <= 35)
             {
                 this.saveLogic = new SaveLogic(new SaveInstance(), this.model);

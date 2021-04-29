@@ -24,3 +24,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "member", Target = "~F:BlackMatter.Model.GameObject.hitbox")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Model.GameObject.Collide(BlackMatter.Model.GameObject)~System.Boolean")]
 [assembly: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1404:Code analysis suppression should have justification", Justification = "<Pending>")]
+[assembly: System.CLSCompliant(false)]
