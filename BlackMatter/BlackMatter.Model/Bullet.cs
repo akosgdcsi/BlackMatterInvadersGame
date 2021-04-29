@@ -1,23 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿// <copyright file="Bullet.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter.Model
 {
+    using System.Windows.Threading;
+
+    /// <summary>
+    /// bullet class.
+    /// </summary>
     public class Bullet : GameObject
     {
-        public bool IsCollided { get; set; }
-        public DispatcherTimer Timer { get; set; }
-        public Bullet(double x, double y, bool isCollided = false) : base(x, y)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bullet"/> class.
+        /// </summary>
+        /// <param name="x">init x.</param>
+        /// <param name="y">init y.</param>
+        /// <param name="isCollided">init isCollided.</param>
+        public Bullet(double x, double y, bool isCollided = false)
+            : base(x, y)
         {
-            IsCollided = isCollided;
+            this.IsCollided = isCollided;
         }
-        public Bullet(double x, double y, int width, int height) : base(x, y, width, height)
-        {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bullet"/> class.
+        /// </summary>
+        /// <param name="x">init x.</param>
+        /// <param name="y">init y.</param>
+        /// <param name="width">init width.</param>
+        /// <param name="height">init height.</param>
+        public Bullet(double x, double y, int width, int height)
+            : base(x, y, width, height)
+        {
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether IsCollided.
+        /// </summary>
+        public bool IsCollided { get; set; }
+
+        /// <summary>
+        /// Gets or sets a timer.
+        /// </summary>
+        public DispatcherTimer Timer { get; set; }
     }
 }

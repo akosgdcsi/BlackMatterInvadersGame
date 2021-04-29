@@ -45,7 +45,7 @@ namespace BlackMatter.Logic
             this.model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150, 100, 100, 3), new List<Enemy>(), new List<Bullet>(), new List<Bullet>(), 1);
             this.space = GameModel.GameWidth / 8;
             this.model.Enemiesinthiswave = this.model.Wave * 50;
-            this.model.enemies = this.EnemyPlacer();
+            this.model.Enemies = this.EnemyPlacer();
             this.model.Score = this.Score;
             return this.model;
         }
@@ -53,7 +53,7 @@ namespace BlackMatter.Logic
         /// <inheritdoc/>
         public void PlayerMove(int dx)
         {
-            int newx = (int)(this.model.player.X + dx);
+            int newx = (int)(this.model.Player.X + dx);
 
             if (newx < 0)
             {
@@ -64,14 +64,14 @@ namespace BlackMatter.Logic
                 newx = 0;
             }
 
-            this.model.player.X = newx;
-            this.model.player.hitbox.X = newx;
+            this.model.Player.X = newx;
+            this.model.Player.hitbox.X = newx;
         }
 
         /// <inheritdoc/>
         public void EnemyMove()
         {
-            foreach (var item in this.model.enemies)
+            foreach (var item in this.model.Enemies)
             {
                 item.Y += GameModel.GameHeight / 14;
                 item.hitbox.Y = (int)item.Y;
@@ -101,11 +101,11 @@ namespace BlackMatter.Logic
 
             foreach (var item in enemyplacer)
             {
-                this.model.enemies.Add(new Enemy(item, 10, 50, 50));
+                this.model.Enemies.Add(new Enemy(item, 10, 50, 50));
                 this.model.Enemiesinthiswave--;
             }
 
-            foreach (var item in this.model.enemies)
+            foreach (var item in this.model.Enemies)
             {
                 if (item.Y > GameModel.GameHeight - 200)
                 {
@@ -117,7 +117,7 @@ namespace BlackMatter.Logic
         /// <inheritdoc/>
         public Bullet Shoot()
         {
-            Bullet bullet = new Bullet(this.model.player.X + 15, this.model.player.Y - 1, 8, 60);
+            Bullet bullet = new Bullet(this.model.Player.X + 15, this.model.Player.Y - 1, 8, 60);
 
             return bullet;
         }
@@ -127,7 +127,7 @@ namespace BlackMatter.Logic
         {
             bullet.Y -= 5;
             bullet.hitbox.Y = (int)bullet.Y;
-            foreach (var item in this.model.enemies.ToList())
+            foreach (var item in this.model.Enemies.ToList())
             {
                 if (bullet.Collide(item))
                 {
@@ -142,7 +142,7 @@ namespace BlackMatter.Logic
         /// <inheritdoc/>
         public void Enemyshoot()
         {
-            var q1 = (from x in this.model.enemies
+            var q1 = (from x in this.model.Enemies
                       where x == this.ClosestEnemy()
                       select x).FirstOrDefault();
 
@@ -153,7 +153,7 @@ namespace BlackMatter.Logic
         /// <inheritdoc/>
         public Bullet Enemyshoot2()
         {
-            var q1 = (from x in this.model.enemies
+            var q1 = (from x in this.model.Enemies
                       where x == this.ClosestEnemy()
                       select x).FirstOrDefault();
 
@@ -170,7 +170,7 @@ namespace BlackMatter.Logic
                 {
                     item.Y += 1;
                     item.hitbox.Y = (int)item.Y;
-                    if (item.Collide(this.model.player))
+                    if (item.Collide(this.model.Player))
                     {
                         this.PlayerDmg();
                     }
@@ -189,7 +189,7 @@ namespace BlackMatter.Logic
             {
                 bullet.Y += 1;
                 bullet.hitbox.Y = (int)bullet.Y;
-                if (bullet.Collide(this.model.player))
+                if (bullet.Collide(this.model.Player))
                 {
                     this.PlayerDmg();
                     bullet.Timer.Stop();
@@ -205,15 +205,15 @@ namespace BlackMatter.Logic
         /// <inheritdoc/>
         public void EnemyDies(Enemy enemy)
         {
-            this.model.enemies.Remove(enemy);
+            this.model.Enemies.Remove(enemy);
         }
 
         /// <inheritdoc/>
         public void PlayerDmg()
         {
-            if (this.model.player.Life >= 1)
+            if (this.model.Player.Life >= 1)
             {
-                this.model.player.Life -= 1;
+                this.model.Player.Life -= 1;
             }
         }
 
@@ -222,7 +222,7 @@ namespace BlackMatter.Logic
         /// </summary>
         public void PlayerDies()
         {
-            if (this.model.player.Life == 0)
+            if (this.model.Player.Life == 0)
             {
                 // PLACEHOLDER FOR DEAD PLAYER
             }
@@ -244,9 +244,9 @@ namespace BlackMatter.Logic
             Enemy closestEnemy = null;
             foreach (var item in enemies)
             {
-                if (min > Math.Sqrt(Math.Abs(this.model.player.X - item.X) + Math.Abs(this.model.player.Y - item.Y)))
+                if (min > Math.Sqrt(Math.Abs(this.model.Player.X - item.X) + Math.Abs(this.model.Player.Y - item.Y)))
                 {
-                    min = Math.Sqrt(Math.Abs(this.model.player.X - item.X) + Math.Abs(this.model.player.Y - item.Y));
+                    min = Math.Sqrt(Math.Abs(this.model.Player.X - item.X) + Math.Abs(this.model.Player.Y - item.Y));
                     closestEnemy = item;
                 }
             }
@@ -256,11 +256,11 @@ namespace BlackMatter.Logic
 
         private List<Enemy> FrontRowEnemies()
         {
-            var q1 = (from x in this.model.enemies
+            var q1 = (from x in this.model.Enemies
                       orderby x.Y descending
                       select x.Y).FirstOrDefault();
 
-            return (from x in this.model.enemies
+            return (from x in this.model.Enemies
                     where x.Y == q1
                     select x).ToList();
         }

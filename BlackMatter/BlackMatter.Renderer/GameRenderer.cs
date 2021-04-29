@@ -94,7 +94,7 @@ namespace BlackMatter.Renderer
 
         private Drawing GetLifes()
         {
-            formattedText = new FormattedText("Life: " + model.player.Life.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
+            formattedText = new FormattedText("Life: " + model.Player.Life.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, font, 20, Brushes.Black);
             Text = new GeometryDrawing(null, red, formattedText.BuildGeometry(new Point(100, 5)));
 
             return Text;
@@ -111,7 +111,7 @@ namespace BlackMatter.Renderer
         private Drawing GetExplosions()
         {
             DrawingGroup dg = new DrawingGroup();
-            foreach (var item in model.enemies)
+            foreach (var item in model.Enemies)
             {
                 if (item.IsShooted)
                 {
@@ -168,7 +168,7 @@ namespace BlackMatter.Renderer
         private Drawing GetEnemies()
         {
             DrawingGroup dg = new DrawingGroup();
-            foreach (var item in model.enemies)
+            foreach (var item in model.Enemies)
             {
                 if (enemy == null || !OldEnemyPositions.Select(x => x.Y).Contains(item.Y))
                 {
@@ -188,34 +188,34 @@ namespace BlackMatter.Renderer
 
         private Drawing GetPlayer()
         {
-            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life==3)
+            if (player == null || OldPlayerPosition.X != model.Player.X && model.Player.Life==3)
             {
                 //ImageDrawing image = new ImageDrawing(GetImage("player_hp3.png"), new Rect(model.player.X, model.player.Y, 80,80));
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Geometry g = new RectangleGeometry(new Rect(model.Player.X, model.Player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp3_Brush, null, g);
                 
-                OldPlayerPosition = new Point(model.player.X,model.player.Y);
+                OldPlayerPosition = new Point(model.Player.X,model.Player.Y);
             }
-            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 2)
+            if (player == null || OldPlayerPosition.X != model.Player.X && model.Player.Life == 2)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Geometry g = new RectangleGeometry(new Rect(model.Player.X, model.Player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp2_Brush, null, g);
 
-                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+                OldPlayerPosition = new Point(model.Player.X, model.Player.Y);
             }
-            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 1)
+            if (player == null || OldPlayerPosition.X != model.Player.X && model.Player.Life == 1)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Geometry g = new RectangleGeometry(new Rect(model.Player.X, model.Player.Y, 80, 80));
                 player = new GeometryDrawing(Player_hp1_Brush, null, g);
 
-                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+                OldPlayerPosition = new Point(model.Player.X, model.Player.Y);
             }
-            if (player == null || OldPlayerPosition.X != model.player.X && model.player.Life == 0)
+            if (player == null || OldPlayerPosition.X != model.Player.X && model.Player.Life == 0)
             {
-                Geometry g = new RectangleGeometry(new Rect(model.player.X, model.player.Y, 80, 80));
+                Geometry g = new RectangleGeometry(new Rect(model.Player.X, model.Player.Y, 80, 80));
                 player = new GeometryDrawing(ExplosionBrush, null, g);
 
-                OldPlayerPosition = new Point(model.player.X, model.player.Y);
+                OldPlayerPosition = new Point(model.Player.X, model.Player.Y);
             }
             return player;
         }

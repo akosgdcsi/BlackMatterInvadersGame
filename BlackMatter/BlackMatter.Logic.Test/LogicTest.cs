@@ -27,12 +27,12 @@ namespace BlackMatter.LogicTest
         public void Init()
         {
             modelMock = new Mock<GameModel>();
-            modelMock.Object.player = new Player(400, 700, 3);
+            modelMock.Object.Player = new Player(400, 700, 3);
             List<Enemy> enemies = new List<Enemy>();
             enemies.Add(new Enemy(50, 10));
             enemies.Add(new Enemy(150, 10));
             enemies.Add(new Enemy(250, 10));
-            modelMock.Object.enemies = enemies;
+            modelMock.Object.Enemies = enemies;
             modelMock.Object.EnemyBullets = new List<Bullet>();
             modelMock.Object.PlayerBullets = new List<Bullet>();
 
@@ -59,7 +59,7 @@ namespace BlackMatter.LogicTest
 
             gameLogic.PlayerMove(10);
 
-            Assert.That(modelMock.Object.player.X, Is.EqualTo(expectedPlayerX));
+            Assert.That(modelMock.Object.Player.X, Is.EqualTo(expectedPlayerX));
         }
 
         /// <summary>
@@ -68,11 +68,11 @@ namespace BlackMatter.LogicTest
         [Test]
         public void EnemyMove()
         {
-            double expectedposition = modelMock.Object.enemies[0].Y + GameModel.GameHeight / 14;
+            double expectedposition = modelMock.Object.Enemies[0].Y + GameModel.GameHeight / 14;
 
             gameLogic.EnemyMove();
 
-            Assert.That(modelMock.Object.enemies[0].Y, Is.EqualTo(expectedposition));
+            Assert.That(modelMock.Object.Enemies[0].Y, Is.EqualTo(expectedposition));
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace BlackMatter.LogicTest
         [Test]
         public void Shoot()
         {
-            double expectedbulletpositionX = modelMock.Object.player.X + 15;
-            double expectedbulletpositionY = modelMock.Object.player.Y - 1;
+            double expectedbulletpositionX = modelMock.Object.Player.X + 15;
+            double expectedbulletpositionY = modelMock.Object.Player.Y - 1;
 
             Bullet b = gameLogic.Shoot();
 

@@ -64,7 +64,7 @@ namespace BlackMatter
 
         private void GameOver()
         {
-            if(model.player.Life==0)
+            if(model.Player.Life==0)
             {
                 dispatcherTimer.Stop();
                 enemyMover.Stop();
@@ -102,7 +102,7 @@ namespace BlackMatter
         }
         private void EnemyShoot()
         {
-            if (model.enemies.Count !=0)
+            if (model.Enemies.Count !=0)
             {
                 Bullet bullet = logic.Enemyshoot2();
                 model.EnemyBullets.Add(bullet);
