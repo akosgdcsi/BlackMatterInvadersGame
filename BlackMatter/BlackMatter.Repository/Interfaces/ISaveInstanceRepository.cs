@@ -5,11 +5,12 @@
 namespace BlackMatter.Repository.Interfaces
 {
     using BlackMatter.Model;
+    using BlackMatter.Model.Interfaces;
 
     /// <summary>
     /// interface if SaveInstanceRepository.
     /// </summary>
-    public interface ISaveInstanceRepository : IStorageRepository<GameModel>
+    public interface ISaveInstanceRepository : IStorageRepository<IGameModel>
     {
         /// <summary>
         /// loads a game.

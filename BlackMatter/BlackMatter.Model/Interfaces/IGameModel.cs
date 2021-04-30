@@ -34,12 +34,12 @@ namespace BlackMatter.Model.Interfaces
         /// <summary>
         /// Gets the game width.
         /// </summary>
-        static double GameWidth { get { return 1000; } }
+        static double GameWidth { get { return 800; } }
 
         /// <summary>
         /// Gets the game height.
         /// </summary>
-        public static double GameHeight { get { return 1000; } }
+        public static double GameHeight { get { return 800; } }
 
         /// <summary>
         /// Gets or sets the wave number.

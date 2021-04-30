@@ -10,6 +10,7 @@ namespace BlackMatter.Logic
     using BlackMatter.Logic.Interfaces;
     using BlackMatter.Model;
     using BlackMatter.Model.Interfaces;
+    using BlackMatter.Repository;
 
     /// <summary>
     /// this is gamelogic class.
@@ -44,7 +45,7 @@ namespace BlackMatter.Logic
         {
             this.model = new GameModel(new Player(GameModel.GameWidth / 2, GameModel.GameHeight - 150, 100, 100, 3), new List<Enemy>(), new List<Bullet>(), new List<Bullet>(), 1);
             this.space = GameModel.GameWidth / 8;
-            this.model.Enemiesinthiswave = this.model.Wave * 50;
+            this.model.Enemiesinthiswave = this.model.Wave * 10;
             this.model.Enemies = this.EnemyPlacer();
             this.model.Score = this.Score;
             return this.model;
@@ -86,7 +87,7 @@ namespace BlackMatter.Logic
 
             if (this.model.Enemiesinthiswave < 8)
             {
-                this.EnemyInThisRow = this.rnd.Next(0, this.model.Enemiesinthiswave);
+                  this.EnemyInThisRow = this.rnd.Next(0, this.model.Enemiesinthiswave + 1);
             }
             else
             {
@@ -157,7 +158,7 @@ namespace BlackMatter.Logic
                       where x == this.ClosestEnemy()
                       select x).FirstOrDefault();
 
-            Bullet bullet = new Bullet(q1.X + 45, q1.Y + 90, 8, 60);
+            Bullet bullet = new Bullet(q1.X + 45, q1.Y + 90, 8, 40);
             return bullet;
         }
 
@@ -234,7 +235,8 @@ namespace BlackMatter.Logic
         public void NextWave()
         {
             this.model.Wave++;
-            this.model.Enemiesinthiswave = this.model.Wave * 50;
+            this.model.Enemiesinthiswave = this.model.Wave * 10;
+            this.model.Player.Life = 3;
         }
 
         private Enemy ClosestEnemy()

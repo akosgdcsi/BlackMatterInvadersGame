@@ -1,36 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿// <copyright file="MainMenuWindow.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter
 {
+    using System.Windows;
+    using BlackMatter.Logic;
+    using BlackMatter.Model.Interfaces;
+    using BlackMatter.Repository;
+
     /// <summary>
-    /// Interaction logic for MainMenuWindow.xaml
+    /// Interaction logic for MainMenuWindow.xaml.
     /// </summary>
     public partial class MainMenuWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainMenuWindow"/> class.
+        /// </summary>
         public MainMenuWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void NewGameClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
-            if (mainWindow.ShowDialog()==true)
+            if (mainWindow.ShowDialog() == true)
             {
-                mainWindow.Show();             
+                mainWindow.Show();
             }
+
+            this.Close();
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
@@ -41,9 +41,18 @@ namespace BlackMatter
         private void HighScoreWin(object sender, RoutedEventArgs e)
         {
             HighScoreWindow scoreWindow = new HighScoreWindow();
-            if (scoreWindow.ShowDialog()==true)
+            if (scoreWindow.ShowDialog() == true)
             {
                 scoreWindow.Show();
+            }
+        }
+
+        private void ContinueGame(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            if (mainWindow.ShowDialog() == true)
+            {
+                mainWindow.Show();
             }
         }
     }

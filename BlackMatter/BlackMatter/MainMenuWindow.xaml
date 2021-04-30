@@ -8,7 +8,7 @@
         Title="MainMenuWindow" Height="800" Width="800">
     <Grid >
         <Button Content="New Game" HorizontalAlignment="Left" Margin="427,265,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="NewGameClick" />
-        <Button Content="Load Game" HorizontalAlignment="Left" Margin="427,348,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" />
+        <Button Content="Load Game" HorizontalAlignment="Left" Margin="427,348,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ContinueGame" />
         <Button Content="High Score" HorizontalAlignment="Left" Margin="427,418,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="HighScoreWin" />
         <Button Content="Exit" HorizontalAlignment="Left" Margin="427,489,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ExitClick" />
         
