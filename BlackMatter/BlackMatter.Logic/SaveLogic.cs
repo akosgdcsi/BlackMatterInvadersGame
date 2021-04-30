@@ -40,6 +40,15 @@ namespace BlackMatter.Logic
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SaveLogic"/> class.
+        /// </summary>
+        /// <param name="save">init save.</param>
+        public SaveLogic(SaveInstance save)
+        {
+            this.save = save;
+        }
+
+        /// <summary>
         /// Saves game model status.
         /// </summary>
         public void SaveInstance()
@@ -50,17 +59,19 @@ namespace BlackMatter.Logic
         /// <summary>
         /// loads the game.
         /// </summary>
-        public void LoadGame()
+        /// <returns>game model.</returns>
+        public GameModel LoadGame()
         {
-            this.save.LoadGame();
+            return this.save.LoadGame();
         }
 
         /// <summary>
         /// saves Highscore.
         /// </summary>
-        public void HighscoreInstance()
+        /// <param name="name">init name.</param>
+        public void HighscoreInstance(string name)
         {
-            Highscore hs = new Highscore("Dave", this.model.Score);
+            Highscore hs = new Highscore(name, this.model.Score);
             this.highScore.Insert(hs);
         }
 
@@ -70,6 +81,14 @@ namespace BlackMatter.Logic
         public void LoadHighscore()
         {
             this.highScore.GetAll();
+        }
+
+        /// <summary>
+        /// Deletes Save.
+        /// </summary>
+        public void DeleteSave()
+        {
+            this.save.DeleteSave();
         }
     }
 }

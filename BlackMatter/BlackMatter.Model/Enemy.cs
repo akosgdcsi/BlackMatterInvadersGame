@@ -4,6 +4,8 @@
 
 namespace BlackMatter.Model
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// enemy class.
     /// </summary>
@@ -28,6 +30,7 @@ namespace BlackMatter.Model
         /// <param name="y">init y.</param>
         /// <param name="width">init width.</param>
         /// <param name="height">init height.</param>
+        [JsonConstructor]
         public Enemy(double x, double y, int width, int height)
             : base(x, y, width, height)
         {

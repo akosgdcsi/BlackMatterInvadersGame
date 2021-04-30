@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace BlackMatter.LogicTest
+namespace BlackMatter.Logic.Test
 {
     using System.Collections.Generic;
     using BlackMatter.Logic;

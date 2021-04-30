@@ -5,6 +5,9 @@
 namespace BlackMatter
 {
     using System.Windows;
+    using BlackMatter.Logic;
+    using BlackMatter.Model.Interfaces;
+    using BlackMatter.Repository;
 
     /// <summary>
     /// Interaction logic for MainMenuWindow.xaml.
@@ -26,6 +29,8 @@ namespace BlackMatter
             {
                 mainWindow.Show();
             }
+
+            this.Close();
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
@@ -39,6 +44,15 @@ namespace BlackMatter
             if (scoreWindow.ShowDialog() == true)
             {
                 scoreWindow.Show();
+            }
+        }
+
+        private void ContinueGame(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            if (mainWindow.ShowDialog() == true)
+            {
+                mainWindow.Show();
             }
         }
     }

@@ -5,6 +5,7 @@
 namespace BlackMatter.Model
 {
     using System.Windows.Threading;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// bullet class.
@@ -30,6 +31,7 @@ namespace BlackMatter.Model
         /// <param name="y">init y.</param>
         /// <param name="width">init width.</param>
         /// <param name="height">init height.</param>
+        [JsonConstructor]
         public Bullet(double x, double y, int width, int height)
             : base(x, y, width, height)
         {

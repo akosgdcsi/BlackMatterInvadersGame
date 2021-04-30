@@ -5,6 +5,7 @@
 namespace BlackMatter
 {
     using System.Windows;
+    using BlackMatter.Model;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml.

@@ -5,6 +5,7 @@
 namespace BlackMatter
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
@@ -39,6 +40,11 @@ namespace BlackMatter
             this.Loaded += this.GameControl_Loaded;
         }
 
+        /// <summary>
+        /// Gets or sets a name.
+        /// </summary>
+        public static string PlayerName { get; set; }
+
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.dispatcherTimer = new DispatcherTimer();
@@ -46,8 +52,19 @@ namespace BlackMatter
             this.enemyMover = new DispatcherTimer();
             this.enemybulletMove = new DispatcherTimer();
             this.wait = new DispatcherTimer();
-            this.logic = new GameLogic(this.model);
-            this.model = this.logic.InitModel();
+            this.saveLogic = new SaveLogic(new SaveInstance(), this.model);
+            if (this.saveLogic.LoadGame() == null)
+            {
+                this.logic = new GameLogic(this.model);
+                this.model = this.logic.InitModel();
+            }
+            else
+            {
+                this.model = this.saveLogic.LoadGame();
+                this.logic = new GameLogic(this.model);
+                this.saveLogic.DeleteSave();
+            }
+
             this.renderer = new GameRenderer(this.model);
             Window win = Window.GetWindow(this);
             if (win != null)
@@ -62,8 +79,6 @@ namespace BlackMatter
             this.enemyMover.Tick += this.EnemyMover_Tick;
             this.enemybulletMove.Interval = TimeSpan.FromMilliseconds(4000);
             this.enemybulletMove.Tick += this.EnemybulletMove_Tick;
-            this.wait.Interval = TimeSpan.FromMilliseconds(10000);
-            this.wait.Tick += this.Wait_Tick;
             this.enemybulletMove.Start();
             this.enemyMover.Start();
             this.dispatcherTimer.Start();
@@ -75,6 +90,21 @@ namespace BlackMatter
         {
             if (e.GetPosition(this).X >= 715 && e.GetPosition(this).X <= 795 && e.GetPosition(this).Y >= 5 && e.GetPosition(this).Y <= 35)
             {
+                this.dispatcherTimer.Stop();
+                this.enemyMover.Stop();
+                this.enemybulletMove.Stop();
+                foreach (var item in this.model.PlayerBullets.ToList())
+                {
+                    item.Timer.Stop();
+                    this.model.PlayerBullets.Remove(item);
+                }
+
+                foreach (var item in this.model.EnemyBullets.ToList())
+                {
+                    item.Timer.Stop();
+                    this.model.EnemyBullets.Remove(item);
+                }
+
                 this.saveLogic = new SaveLogic(new SaveInstance(), this.model);
                 this.saveLogic.SaveInstance();
                 Window win = Window.GetWindow(this);
@@ -96,11 +126,13 @@ namespace BlackMatter
                 this.dispatcherTimer.Stop();
                 this.enemyMover.Stop();
                 this.enemybulletMove.Stop();
-                MessageBox.Show("Game Over!\n\nHighscore: " + this.model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
 
+                // MessageBox.Show("Game Over!\n\nHighscore: " + this.model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
+                NameAsk nameAsk = new NameAsk();
+                nameAsk.ShowDialog();
                 HighScoreRepository highScore = new HighScoreRepository();
                 this.saveLogic = new SaveLogic(highScore, this.model);
-                this.saveLogic.HighscoreInstance();
+                this.saveLogic.HighscoreInstance(PlayerName);
                 Window win = Window.GetWindow(this);
                 win.Close();
                 MainMenuWindow mainMenuWindow = new MainMenuWindow();
@@ -158,11 +190,7 @@ namespace BlackMatter
             }
             else
             {
-                this.enemyMover.Stop();
-                this.wait.Start();
                 this.logic.NextWave();
-                this.wait.Stop();
-                this.enemyMover.Start();
             }
         }
 

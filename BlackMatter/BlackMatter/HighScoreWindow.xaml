@@ -8,6 +8,7 @@
         Title="HighScoreWindow" Height="400" Width="300">
     <Grid>
         <Button Content="Exit" HorizontalAlignment="Left" Height="24" Margin="210,350,0,0" VerticalAlignment="Top" Width="80" Click="ExitClick"/>
+        <ListBox x:Name="lista" HorizontalAlignment="Left" Height="308" Margin="23,10,0,0" VerticalAlignment="Top" Width="248"/>
 
     </Grid>
 </Window>

@@ -10,3 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1408:Conditional expressions should declare precedence", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetPlayer~System.Windows.Media.Drawing")]
 [assembly: SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetPlayer~System.Windows.Media.Drawing")]
 [assembly: System.CLSCompliant(false)]
+[assembly: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1404:Code analysis suppression should have justification", Justification = "<Pending>")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetWaves~System.Windows.Media.Drawing")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetLifes~System.Windows.Media.Drawing")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetScore~System.Windows.Media.Drawing")]

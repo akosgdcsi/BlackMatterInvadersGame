@@ -52,5 +52,13 @@ namespace BlackMatter.Repository
 
             return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}"));
         }
+
+        /// <summary>
+        /// Deletes Savefile.
+        /// </summary>
+        public void DeleteSave()
+        {
+            File.Delete(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}");
+        }
     }
 }

@@ -4,6 +4,8 @@
 
 namespace BlackMatter.Model
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// player class.
     /// </summary>
@@ -29,6 +31,7 @@ namespace BlackMatter.Model
         /// <param name="width">init width.</param>
         /// <param name="height">init height.</param>
         /// <param name="life">init life.</param>
+        [JsonConstructor]
         public Player(double x, double y, int width, int height, int life)
             : base(x, y, width, height)
         {
