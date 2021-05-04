@@ -151,7 +151,7 @@ namespace BlackMatter.Renderer
 
         private Drawing GetScore()
         {
-            this.formattedText = new FormattedText("Score: " + this.model.Score.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black,1);
+            this.formattedText = new FormattedText("Score: " + this.model.Score.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black, 1);
             this.text = new GeometryDrawing(null, this.red, this.formattedText.BuildGeometry(new Point(180, 5)));
 
             return this.text;
@@ -159,7 +159,7 @@ namespace BlackMatter.Renderer
 
         private Drawing GetLifes()
         {
-            this.formattedText = new FormattedText("Life: " + this.model.Player.Life.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black,1);
+            this.formattedText = new FormattedText("Life: " + this.model.Player.Life.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black, 1);
             this.text = new GeometryDrawing(null, this.red, this.formattedText.BuildGeometry(new Point(100, 5)));
 
             return this.text;
@@ -167,7 +167,7 @@ namespace BlackMatter.Renderer
 
         private Drawing GetWaves()
         {
-            this.formattedText = new FormattedText("Wave: " + this.model.Wave.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black,1);
+            this.formattedText = new FormattedText("Wave: " + this.model.Wave.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, this.font, 20, Brushes.Black, 1);
             this.text = new GeometryDrawing(null, this.red, this.formattedText.BuildGeometry(new Point(5, 5)));
 
             return this.text;
