@@ -1,24 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="Highscore.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter.Model
 {
+    /// <summary>
+    /// Highscore class.
+    /// </summary>
     public class Highscore
     {
-        public string Name { get; set; }
-        public int Score { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Highscore"/> class.
+        /// </summary>
+        /// <param name="name">init name.</param>
+        /// <param name="score">init score.</param>
         public Highscore(string name, int score)
         {
-            Name = name;
-            Score = score;
+            this.Name = name;
+            this.Score = score;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Highscore"/> class.
+        /// </summary>
         public Highscore()
         {
-
         }
+
+        /// <summary>
+        /// Gets or sets a name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets a score.
+        /// </summary>
+        public int Score { get; set; }
     }
 }

@@ -1,19 +1,26 @@
-﻿using BlackMatter.Model;
-using BlackMatter.Repository.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="SaveInstance.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter.Repository
 {
-    public class SaveInstance : StorageRepository<GameModel>, ISaveInstanceRepository
+    using System.IO;
+    using System.Reflection;
+    using BlackMatter.Model;
+    using BlackMatter.Model.Interfaces;
+    using BlackMatter.Repository.Interfaces;
+    using Newtonsoft.Json;
+
+    /// <summary>
+    /// saveinstance class.
+    /// </summary>
+    public class SaveInstance : StorageRepository<IGameModel>, ISaveInstanceRepository
     {
-        string filename;
+        private string filename;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SaveInstance"/> class.
+        /// </summary>
         public SaveInstance()
         {
             this.filename = "savegame.json";
@@ -21,24 +28,37 @@ namespace BlackMatter.Repository
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\");
             }
-            if (!File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{filename}"))
+
+            if (!File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}"))
             {
-                File.Create(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{filename}").Close();
+                File.Create(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}").Close();
             }
         }
-        public override void Insert(GameModel obj)
+
+        /// <inheritdoc/>
+        public override void Insert(IGameModel obj)
         {
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            File.WriteAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{filename}", json);
+            File.WriteAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}", json);
         }
 
+        /// <inheritdoc/>
         public GameModel LoadGame()
         {
-            if (File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{filename}") == string.Empty)
+            if (File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}") == string.Empty)
             {
                 return default;
             }
-            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{filename}"));
+
+            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}"));
+        }
+
+        /// <summary>
+        /// Deletes Savefile.
+        /// </summary>
+        public void DeleteSave()
+        {
+            File.Delete(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $@"\Saves\{this.filename}");
         }
     }
 }

@@ -1,155 +1,238 @@
-﻿using BlackMatter.Logic;
-using BlackMatter.Model;
-using BlackMatter.Renderer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Input;
-using BlackMatter.Model.Interfaces;
-using BlackMatter.Logic.Interfaces;
+﻿// <copyright file="GameControl.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BlackMatter
 {
-    public class GameControl:FrameworkElement
-    {
-        IGameModel model;
-        IGameLogic logic;
-        GameRenderer renderer;
-        DispatcherTimer dispatcherTimer;
-        DispatcherTimer enemyMover;
-        DispatcherTimer bulletMover;
-        DispatcherTimer enemybulletMove;
+    using System;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Threading;
+    using BlackMatter.Logic;
+    using BlackMatter.Logic.Interfaces;
+    using BlackMatter.Model;
+    using BlackMatter.Model.Interfaces;
+    using BlackMatter.Renderer;
+    using BlackMatter.Repository;
 
+    /// <summary>
+    /// gamecontrol class.
+    /// </summary>
+    public class GameControl : FrameworkElement
+    {
+        private IGameModel model;
+        private IGameLogic logic;
+        private SaveLogic saveLogic;
+        private GameRenderer renderer;
+        private DispatcherTimer dispatcherTimer;
+        private DispatcherTimer enemyMover;
+        private DispatcherTimer bulletMover;
+        private DispatcherTimer enemybulletMove;
+        private DispatcherTimer wait;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameControl"/> class.
+        /// </summary>
         public GameControl()
         {
-            Loaded += GameControl_Loaded; 
+            this.Loaded += this.GameControl_Loaded;
         }
+
+        /// <summary>
+        /// Gets or sets a name.
+        /// </summary>
+        public static string PlayerName { get; set; }
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer = new DispatcherTimer();
-            bulletMover = new DispatcherTimer();
-            enemyMover = new DispatcherTimer();
-            enemybulletMove = new DispatcherTimer();
-            this.logic =new GameLogic(model);
-            model = logic.InitModel();
-            renderer = new GameRenderer(model);
-
-            Window win = Window.GetWindow(this);
-            if (win!=null)
+            this.dispatcherTimer = new DispatcherTimer();
+            this.bulletMover = new DispatcherTimer();
+            this.enemyMover = new DispatcherTimer();
+            this.enemybulletMove = new DispatcherTimer();
+            this.wait = new DispatcherTimer();
+            this.saveLogic = new SaveLogic(new SaveInstance(), this.model);
+            if (this.saveLogic.LoadGame() == null)
             {
-                win.KeyDown += Win_KeyDown;
-                MouseDown += GameControl_MouseDown;
+                this.logic = new GameLogic(this.model);
+                this.model = this.logic.InitModel();
             }
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;                       
-            enemyMover.Interval = TimeSpan.FromMilliseconds(2000);
-            enemyMover.Tick += EnemyMover_Tick;
-            enemybulletMove.Interval = TimeSpan.FromMilliseconds(4000);
-            enemybulletMove.Tick += EnemybulletMove_Tick;
+            else
+            {
+                this.model = this.saveLogic.LoadGame();
+                this.logic = new GameLogic(this.model);
+                this.saveLogic.DeleteSave();
+            }
 
-            enemybulletMove.Start();
-            enemyMover.Start();
-            dispatcherTimer.Start();
-            
+            this.renderer = new GameRenderer(this.model);
+            Window win = Window.GetWindow(this);
+            if (win != null)
+            {
+                win.KeyDown += this.Win_KeyDown;
+                win.MouseLeftButtonDown += this.Win_MouseLeftButtonDown;
+            }
 
+            this.dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
+            this.dispatcherTimer.Tick += this.DispatcherTimer_Tick;
+            this.enemyMover.Interval = TimeSpan.FromMilliseconds(2000);
+            this.enemyMover.Tick += this.EnemyMover_Tick;
+            this.enemybulletMove.Interval = TimeSpan.FromMilliseconds(4000);
+            this.enemybulletMove.Tick += this.EnemybulletMove_Tick;
+            this.enemybulletMove.Start();
+            this.enemyMover.Start();
+            this.dispatcherTimer.Start();
 
-            InvalidateVisual();
+            this.InvalidateVisual();
         }
 
-        private void GameOver()
+        private void Win_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(model.player.Life==0)
+            if (e.GetPosition(this).X >= 715 && e.GetPosition(this).X <= 795 && e.GetPosition(this).Y >= 5 && e.GetPosition(this).Y <= 35)
             {
-                dispatcherTimer.Stop();
-                enemyMover.Stop();
-                enemybulletMove.Stop();
-                MessageBox.Show("Game Over!\n\nHighscore: "+model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
+                this.dispatcherTimer.Stop();
+                this.enemyMover.Stop();
+                this.enemybulletMove.Stop();
+                foreach (var item in this.model.PlayerBullets.ToList())
+                {
+                    item.Timer.Stop();
+                    this.model.PlayerBullets.Remove(item);
+                }
+
+                foreach (var item in this.model.EnemyBullets.ToList())
+                {
+                    item.Timer.Stop();
+                    this.model.EnemyBullets.Remove(item);
+                }
+
+                this.saveLogic = new SaveLogic(new SaveInstance(), this.model);
+                this.saveLogic.SaveInstance();
                 Window win = Window.GetWindow(this);
                 win.Close();
                 MainMenuWindow mainMenuWindow = new MainMenuWindow();
                 mainMenuWindow.Show();
             }
-            
         }
+
+        private void Wait_Tick(object sender, EventArgs e)
+        {
+            this.InvalidateVisual();
+        }
+
+        private void GameOver()
+        {
+            if (this.model.Player.Life == 0)
+            {
+                this.dispatcherTimer.Stop();
+                this.enemyMover.Stop();
+                this.enemybulletMove.Stop();
+
+                // MessageBox.Show("Game Over!\n\nHighscore: " + this.model.Score, "GameOver", MessageBoxButton.OK, MessageBoxImage.Hand);
+                NameAsk nameAsk = new NameAsk();
+                nameAsk.ShowDialog();
+                HighScoreRepository highScore = new HighScoreRepository();
+                this.saveLogic = new SaveLogic(highScore, this.model);
+                this.saveLogic.HighscoreInstance(PlayerName);
+                Window win = Window.GetWindow(this);
+                win.Close();
+                MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                mainMenuWindow.Show();
+            }
+        }
+
         private void EnemybulletMove_Tick(object sender, EventArgs e)
         {
-            EnemyShoot();
-            InvalidateVisual();
+            this.EnemyShoot();
+            this.InvalidateVisual();
         }
 
         private void EnemyShoot_Tick(object sender, EventArgs e)
         {
-            logic.Enemyshoot();
-            InvalidateVisual();
+            this.logic.Enemyshoot();
+            this.InvalidateVisual();
         }
 
         private void PlayerShoot()
         {
-            Bullet bullet = logic.Shoot();
-            model.PlayerBullets.Add(bullet);
+            Bullet bullet = this.logic.Shoot();
+            this.model.PlayerBullets.Add(bullet);
             bullet.Timer = new DispatcherTimer();
             bullet.Timer.Interval = TimeSpan.FromMilliseconds(30);
-            bullet.Timer.Tick += delegate {
-                logic.BulletMove(ref bullet);
+            bullet.Timer.Tick += delegate
+            {
+                this.logic.BulletMove(ref bullet);
             };
             bullet.Timer.Start();
         }
+
         private void EnemyShoot()
         {
-            if (model.enemies.Count !=0)
+            if (this.model.Enemies.Count != 0)
             {
-                Bullet bullet = logic.Enemyshoot2();
-                model.EnemyBullets.Add(bullet);
+                Bullet bullet = this.logic.Enemyshoot2();
+                this.model.EnemyBullets.Add(bullet);
                 bullet.Timer = new DispatcherTimer();
                 bullet.Timer.Interval = TimeSpan.FromMilliseconds(5);
-                bullet.Timer.Tick += delegate {
-                    logic.EnemyBulletMove2(ref bullet);
+                bullet.Timer.Tick += delegate
+                {
+                    this.logic.EnemyBulletMove2(ref bullet);
                 };
                 bullet.Timer.Start();
             }
-            
-
         }
 
         private void EnemyMover_Tick(object sender, EventArgs e)
         {
-            logic.EnemyMove();   
-            InvalidateVisual();
+            if (this.model.Enemiesinthiswave != 0 || this.model.Enemies.Count != 0)
+            {
+                this.logic.EnemyMove();
+                this.InvalidateVisual();
+            }
+            else
+            {
+                this.logic.NextWave();
+            }
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            GameOver();
-            InvalidateVisual();
+            if (this.model.Player.Life == 0)
+            {
+                this.logic.PlayerMove(-1);
+                this.InvalidateVisual();
+                this.GameOver();
+            }
+
+            this.InvalidateVisual();
         }
 
+        /// <summary>
+        /// overrides OnRender.
+        /// </summary>
+        /// <param name="drawingContext">init drawingContext.</param>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (renderer != null) drawingContext.DrawDrawing(renderer.BuildDrawing());                        
+            if (this.renderer != null)
+            {
+                drawingContext.DrawDrawing(this.renderer.BuildDrawing());
+            }
         }
 
         private void GameControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logic.PlayerMove((int)e.GetPosition(this).X);
+            this.logic.PlayerMove((int)e.GetPosition(this).X);
         }
 
         private void Win_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            switch(e.Key)
+            switch (e.Key)
             {
-                case Key.Left: logic.PlayerMove(-25); break;
-                case Key.Right: logic.PlayerMove(25); break;
-                case Key.A: logic.PlayerMove(-50); break;
-                case Key.D: logic.PlayerMove(50); break;
-                case Key.Space: PlayerShoot(); break;
+                case Key.Left: this.logic.PlayerMove(-25); break;
+                case Key.Right: this.logic.PlayerMove(25); break;
+                case Key.A: this.logic.PlayerMove(-50); break;
+                case Key.D: this.logic.PlayerMove(50); break;
+                case Key.Space: this.PlayerShoot(); break;
             }
         }
-
     }
 }

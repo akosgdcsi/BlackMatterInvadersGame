@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatter.Repository</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.Repository.HighScoreRepository">
+            <summary>
+            Highscore repo.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.HighScoreRepository.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Repository.HighScoreRepository"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.HighScoreRepository.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Repository.HighScoreRepository.Insert(BlackMatter.Model.Highscore)">
+            <inheritdoc/>
+        </member>
+        <member name="T:BlackMatter.Repository.Interfaces.IHighscoreRepository">
+            <summary>
+            interface for Highscore.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BlackMatter.Repository.Interfaces.IHighscoreRepository.GetAll" -->
+        <member name="T:BlackMatter.Repository.Interfaces.ISaveInstanceRepository">
+            <summary>
+            interface if SaveInstanceRepository.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.Interfaces.ISaveInstanceRepository.LoadGame">
+            <summary>
+            loads a game.
+            </summary>
+            <returns>a game model.</returns>
+        </member>
+        <member name="T:BlackMatter.Repository.Interfaces.IStorageRepository`1">
+            <summary>
+            interface of storagerepository.
+            </summary>
+            <typeparam name="T">is a class.</typeparam>
+        </member>
+        <member name="M:BlackMatter.Repository.Interfaces.IStorageRepository`1.Insert(`0)">
+            <summary>
+            adds to the file.
+            </summary>
+            <param name="obj">sends a class object.</param>
+        </member>
+        <member name="T:BlackMatter.Repository.SaveInstance">
+            <summary>
+            saveinstance class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.SaveInstance.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Repository.SaveInstance"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.SaveInstance.Insert(BlackMatter.Model.Interfaces.IGameModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Repository.SaveInstance.LoadGame">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Repository.SaveInstance.DeleteSave">
+            <summary>
+            Deletes Savefile.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Repository.StorageRepository`1">
+            <summary>
+            storagerepo class.
+            </summary>
+            <typeparam name="T">is calss.</typeparam>
+        </member>
+        <member name="M:BlackMatter.Repository.StorageRepository`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Repository.StorageRepository`1"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Repository.StorageRepository`1.Insert(`0)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

@@ -7,11 +7,14 @@
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="800" Width="800">
     <Grid >
-        <Button Content="New Game" HorizontalAlignment="Left" Margin="427,265,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="NewGameClick" />
-        <Button Content="Load Game" HorizontalAlignment="Left" Margin="427,348,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" />
-        <Button Content="High Score" HorizontalAlignment="Left" Margin="427,418,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="HighScoreWin" />
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="427,489,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ExitClick" />
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/menu_bg_1.png"/>
+        </Grid.Background>
+
+        <Button Content="New Game" HorizontalAlignment="Left" Margin="54,467,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="NewGameClick" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
+        <Button Content="Load Game" HorizontalAlignment="Left" Margin="54,535,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" Click="ContinueGame" BorderBrush="{x:Null}" />
+        <Button Content="High Score" HorizontalAlignment="Left" Margin="54,605,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="HighScoreWin" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="54,671,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ExitClick" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
 
     </Grid>
 </Window>

@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatter.Logic</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.Logic.GameLogic">
+            <summary>
+            this is gamelogic class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.#ctor(BlackMatter.Model.Interfaces.IGameModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Logic.GameLogic"/> class.
+            </summary>
+            <param name="model">model instance.</param>
+        </member>
+        <member name="P:BlackMatter.Logic.GameLogic.EnemyInThisRow">
+            <summary>
+            Gets or sets an enemyraw.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Logic.GameLogic.Score">
+            <summary>
+            Gets or sets a score.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.InitModel">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.PlayerMove(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.EnemyMove">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.Shoot">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.BulletMove(BlackMatter.Model.Bullet@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.Enemyshoot">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.Enemyshoot2">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.EnemyBulletMove">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.EnemyBulletMove2(BlackMatter.Model.Bullet@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.EnemyDies(BlackMatter.Model.Enemy)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.PlayerDmg">
+            <inheritdoc/>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.PlayerDies">
+            <summary>
+            saddly this thing happend.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.GameLogic.NextWave">
+            <summary>
+            sets the next wave.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Logic.Interfaces.IGameLogic">
+            <summary>
+            interface of GameLogic.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.InitModel">
+            <summary>
+            initialize a the gamemodel.
+            </summary>
+            <returns>IGameModel status.</returns>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.PlayerMove(System.Int32)">
+            <summary>
+            resposible for moveing the player.
+            </summary>
+            <param name="dx">this is the distance to move.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.EnemyMove">
+            <summary>
+            resposible for moveing the enemy.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.Shoot">
+            <summary>
+            creats a bullet.
+            </summary>
+            <returns>a bullet object.</returns>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.BulletMove(BlackMatter.Model.Bullet@)">
+            <summary>
+            moves all the player bullet on the field.
+            </summary>
+            <param name="bullet">get a bullet referance.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.Enemyshoot">
+            <summary>
+            creats a bullet for the enemy.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.Enemyshoot2">
+            <summary>
+            creats a bullet for the enemy.
+            </summary>
+            <returns>a bullett object.</returns>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.EnemyBulletMove">
+            <summary>
+            moves all the enemy bullet on the field.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.EnemyBulletMove2(BlackMatter.Model.Bullet@)">
+            <summary>
+            moves all the enemy bullet on the field.
+            </summary>
+            <param name="bullet">get a bullet referance.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.EnemyDies(BlackMatter.Model.Enemy)">
+            <summary>
+            removes an enemy from the list.
+            </summary>
+            <param name="enemy">deathrow enemy.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.PlayerDmg">
+            <summary>
+            removes 1 life from player if has not got any.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.IGameLogic.NextWave">
+            <summary>
+            sets the next wave.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Logic.Interfaces.ISaveLogic">
+            <summary>
+            Interface Savelogic.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.ISaveLogic.SaveInstance">
+            <summary>
+            Saves game model status.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.ISaveLogic.LoadGame">
+            <summary>
+            loads the game.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.ISaveLogic.HighscoreInstance">
+            <summary>
+            saves Highscore.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Interfaces.ISaveLogic.LoadHighscore">
+            <summary>
+            Gets all highscore.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Logic.SaveLogic">
+            <summary>
+            Save file.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.#ctor(BlackMatter.Repository.SaveInstance,BlackMatter.Model.Interfaces.IGameModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Logic.SaveLogic"/> class.
+            </summary>
+            <param name="save">init save.</param>
+            <param name="model">init model.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.#ctor(BlackMatter.Repository.HighScoreRepository,BlackMatter.Model.Interfaces.IGameModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Logic.SaveLogic"/> class.
+            </summary>
+            <param name="highScore">init highscore.</param>
+            <param name="model">init model.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.#ctor(BlackMatter.Repository.SaveInstance)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Logic.SaveLogic"/> class.
+            </summary>
+            <param name="save">init save.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.SaveInstance">
+            <summary>
+            Saves game model status.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.LoadGame">
+            <summary>
+            loads the game.
+            </summary>
+            <returns>game model.</returns>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.HighscoreInstance(System.String)">
+            <summary>
+            saves Highscore.
+            </summary>
+            <param name="name">init name.</param>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.LoadHighscore">
+            <summary>
+            Gets all highscore.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.SaveLogic.DeleteSave">
+            <summary>
+            Deletes Save.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatterRenderer</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.Renderer.GameRenderer">
+            <summary>
+            Gamerender class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Renderer.GameRenderer.#ctor(BlackMatter.Model.Interfaces.IGameModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Renderer.GameRenderer"/> class.
+            </summary>
+            <param name="model">init model.</param>
+        </member>
+        <member name="M:BlackMatter.Renderer.GameRenderer.BuildDrawing">
+            <summary>
+            gives all objects out.
+            </summary>
+            <returns>a drwing group.</returns>
+        </member>
+        <member name="M:BlackMatter.Renderer.GameRenderer.GetImage(System.String)">
+            <summary>
+            Reading out images.
+            </summary>
+            <param name="fileName">init filename.</param>
+            <returns>bitmapimage.</returns>
+        </member>
+    </members>
+</doc>
