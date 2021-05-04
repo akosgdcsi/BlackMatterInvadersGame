@@ -196,7 +196,13 @@ namespace BlackMatter
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            this.GameOver();
+            if (this.model.Player.Life == 0)
+            {
+                this.logic.PlayerMove(-1);
+                this.InvalidateVisual();
+                this.GameOver();
+            }
+
             this.InvalidateVisual();
         }
 

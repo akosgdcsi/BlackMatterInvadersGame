@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatter</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.App">
+            <summary>
+            Interaction logic for App.xaml.
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:BlackMatter.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:BlackMatter.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.GameControl">
+            <summary>
+            gamecontrol class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.GameControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.GameControl"/> class.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.GameControl.PlayerName">
+            <summary>
+            Gets or sets a name.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.GameControl.OnRender(System.Windows.Media.DrawingContext)">
+            <summary>
+            overrides OnRender.
+            </summary>
+            <param name="drawingContext">init drawingContext.</param>
+        </member>
+        <member name="T:BlackMatter.HighScoreWindow">
+            <summary>
+            Interaction logic for HighScoreWindow.xaml.
+            </summary>
+            <summary>
+            HighScoreWindow
+            </summary>
+        </member>
+        <member name="M:BlackMatter.HighScoreWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.HighScoreWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.HighScoreWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:BlackMatter.MainMenuWindow">
+            <summary>
+            Interaction logic for MainMenuWindow.xaml.
+            </summary>
+            <summary>
+            MainMenuWindow
+            </summary>
+        </member>
+        <member name="M:BlackMatter.MainMenuWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.MainMenuWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.MainMenuWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:BlackMatter.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml.
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:BlackMatter.MainWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:BlackMatter.NameAsk">
+            <summary>
+            Interaction logic for NameAsk.xaml.
+            </summary>
+            <summary>
+            NameAsk
+            </summary>
+        </member>
+        <member name="M:BlackMatter.NameAsk.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.NameAsk"/> class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.NameAsk.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

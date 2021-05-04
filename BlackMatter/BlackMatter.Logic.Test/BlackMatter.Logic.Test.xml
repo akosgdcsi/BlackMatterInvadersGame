@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatter.Logic.Test</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.Logic.Test.LogicTest">
+            <summary>
+            Documentation of the public LogicTest class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.Init">
+            <summary>
+            init test objects.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.PlayerMove">
+            <summary>
+            tests player movemnet.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.EnemyMove">
+            <summary>
+            tests enemy movement.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.Shoot">
+            <summary>
+            tests player shooting.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.BulletMove">
+            <summary>
+            tests player bullet movement.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Logic.Test.LogicTest.EnemyBulletMove">
+            <summary>
+            tests player bullet movement.
+            </summary>
+        </member>
+    </members>
+</doc>

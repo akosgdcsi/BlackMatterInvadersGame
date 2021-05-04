@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlackMatter.Model</name>
+    </assembly>
+    <members>
+        <member name="T:BlackMatter.Model.Bullet">
+            <summary>
+            bullet class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.Bullet.#ctor(System.Double,System.Double,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Bullet"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="isCollided">init isCollided.</param>
+        </member>
+        <member name="M:BlackMatter.Model.Bullet.#ctor(System.Double,System.Double,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Bullet"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="width">init width.</param>
+            <param name="height">init height.</param>
+        </member>
+        <member name="P:BlackMatter.Model.Bullet.IsCollided">
+            <summary>
+            Gets or sets a value indicating whether IsCollided.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Bullet.Timer">
+            <summary>
+            Gets or sets a timer.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Model.Enemy">
+            <summary>
+            enemy class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.Enemy.#ctor(System.Double,System.Double,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Enemy"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="isShooted">init isshooted.</param>
+        </member>
+        <member name="M:BlackMatter.Model.Enemy.#ctor(System.Double,System.Double,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Enemy"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="width">init width.</param>
+            <param name="height">init height.</param>
+        </member>
+        <member name="P:BlackMatter.Model.Enemy.IsShooted">
+            <summary>
+            Gets or sets a value indicating whether isShooted.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Model.GameModel">
+            <summary>
+            this is gam model class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.GameModel.#ctor(BlackMatter.Model.Player,System.Collections.Generic.List{BlackMatter.Model.Enemy},System.Collections.Generic.List{BlackMatter.Model.Bullet},System.Collections.Generic.List{BlackMatter.Model.Bullet},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.GameModel"/> class.
+            </summary>
+            <param name="player">init a player.</param>
+            <param name="enemies">init enemies.</param>
+            <param name="playerBullets">init playerbullets.</param>
+            <param name="enemyBullets">init enemybullets.</param>
+            <param name="wave">init wave.</param>
+        </member>
+        <member name="M:BlackMatter.Model.GameModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.GameModel"/> class.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.GameWidth">
+            <summary>
+            Gets the game width.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.GameHeight">
+            <summary>
+            Gets the game width.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.Player">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.Enemies">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.PlayerBullets">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.EnemyBullets">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.Wave">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.Enemiesinthiswave">
+            <inheritdoc/>
+        </member>
+        <member name="P:BlackMatter.Model.GameModel.Score">
+            <inheritdoc/>
+        </member>
+        <member name="T:BlackMatter.Model.GameObject">
+            <summary>
+            this is game object file.
+            </summary>
+        </member>
+        <member name="F:BlackMatter.Model.GameObject.hitbox">
+            <summary>
+            creats a hitbox.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.GameObject.#ctor(System.Double,System.Double,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.GameObject"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="width">init width.</param>
+            <param name="height">init height.</param>
+        </member>
+        <member name="M:BlackMatter.Model.GameObject.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.GameObject"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+        </member>
+        <member name="P:BlackMatter.Model.GameObject.X">
+            <summary>
+            Gets or sets an x cord.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.GameObject.Y">
+            <summary>
+            Gets or sets an y cord.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.GameObject.Collide(BlackMatter.Model.GameObject)">
+            <summary>
+            makes cillision.
+            </summary>
+            <param name="other">init a game object.</param>
+            <returns>with true or false.</returns>
+        </member>
+        <member name="T:BlackMatter.Model.Highscore">
+            <summary>
+            Highscore class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.Highscore.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Highscore"/> class.
+            </summary>
+            <param name="name">init name.</param>
+            <param name="score">init score.</param>
+        </member>
+        <member name="M:BlackMatter.Model.Highscore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Highscore"/> class.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Highscore.Name">
+            <summary>
+            Gets or sets a name.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Highscore.Score">
+            <summary>
+            Gets or sets a score.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Model.Interfaces.IGameModel">
+            <summary>
+            Interface of gamemodel.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.Player">
+            <summary>
+            Gets or sets a Player.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.Enemies">
+            <summary>
+            Gets or sets the enemeies.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.PlayerBullets">
+            <summary>
+            Gets or sets the Player bullets.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.EnemyBullets">
+            <summary>
+            Gets or sets the Player bullets.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.GameWidth">
+            <summary>
+            Gets the game width.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.GameHeight">
+            <summary>
+            Gets the game height.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.Wave">
+            <summary>
+            Gets or sets the wave number.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.Enemiesinthiswave">
+            <summary>
+            Gets or sets the enemies in the wave.
+            </summary>
+        </member>
+        <member name="P:BlackMatter.Model.Interfaces.IGameModel.Score">
+            <summary>
+            Gets or sets the score.
+            </summary>
+        </member>
+        <member name="T:BlackMatter.Model.Player">
+            <summary>
+            player class.
+            </summary>
+        </member>
+        <member name="M:BlackMatter.Model.Player.#ctor(System.Double,System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Player"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="life">init life.</param>
+        </member>
+        <member name="M:BlackMatter.Model.Player.#ctor(System.Double,System.Double,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlackMatter.Model.Player"/> class.
+            </summary>
+            <param name="x">init x.</param>
+            <param name="y">init y.</param>
+            <param name="width">init width.</param>
+            <param name="height">init height.</param>
+            <param name="life">init life.</param>
+        </member>
+        <member name="P:BlackMatter.Model.Player.Life">
+            <summary>
+            Gets or sets a Life.
+            </summary>
+        </member>
+    </members>
+</doc>
