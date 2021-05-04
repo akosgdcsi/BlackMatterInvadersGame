@@ -14,3 +14,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetWaves~System.Windows.Media.Drawing")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetLifes~System.Windows.Media.Drawing")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetScore~System.Windows.Media.Drawing")]
+[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:Elements should be ordered by access", Justification = "<Pending>", Scope = "member", Target = "~M:BlackMatter.Renderer.GameRenderer.GetImage(System.String)~System.Windows.Media.Imaging.BitmapImage")]

@@ -9,6 +9,10 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>BlackMatter.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="menu_bg_1.png" />
   </ItemGroup>

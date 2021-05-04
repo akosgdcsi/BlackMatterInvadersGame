@@ -12,7 +12,7 @@
         </Grid.Background>
 
         <Button Content="New Game" HorizontalAlignment="Left" Margin="54,467,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="NewGameClick" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
-        <Button Content="Load Game" HorizontalAlignment="Left" Margin="54,535,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" Click="LoadGameClick" BorderBrush="{x:Null}" />
+        <Button Content="Load Game" HorizontalAlignment="Left" Margin="54,535,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" Click="ContinueGame" BorderBrush="{x:Null}" />
         <Button Content="High Score" HorizontalAlignment="Left" Margin="54,605,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="HighScoreWin" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
         <Button Content="Exit" HorizontalAlignment="Left" Margin="54,671,0,0" VerticalAlignment="Top" Height="44" Width="263" Background="{x:Null}" Opacity="100" Click="ExitClick" FontSize="22" FontWeight="Bold" FontFamily="Arial Black" Foreground="White" BorderBrush="{x:Null}" />
 

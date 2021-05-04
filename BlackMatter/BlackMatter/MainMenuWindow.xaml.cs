@@ -55,9 +55,5 @@ namespace BlackMatter
                 mainWindow.Show();
             }
         }
-
-        private void LoadGameClick(object sender, RoutedEventArgs e)
-        {
-        }
     }
 }
