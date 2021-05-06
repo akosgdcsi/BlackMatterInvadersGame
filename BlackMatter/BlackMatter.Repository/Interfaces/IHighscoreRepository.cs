@@ -15,7 +15,7 @@ namespace BlackMatter.Repository.Interfaces
         /// <summary>
         /// gets all the highscore.
         /// </summary>
-        /// <returns>IQueryable.<Highscore>.</returns>
+        /// <returns>IQueryable-Highscore.</returns>
         IQueryable<Highscore> GetAll();
     }
 }
