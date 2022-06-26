@@ -1,4 +1,4 @@
-# Programing 4 - GameProject #
+# GameProject #
 #### Szoftvertechnológia és grafikus felhasználói interfész tervezése - JátékProjekt
 
 ### BLackMatter Invaders is a rework of the famous classic Space Invaders. Where you alone can defend against the dangerous aliens attacking our personal space.
